@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
   --font-sans: var(--font-sans);
  }
   :root {
-  --background: #FCF9F2; /* A more noticeable, warm ivory */
+  --background: #FFFFFF; /* Clean white background */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);

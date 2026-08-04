@@ -18,42 +18,50 @@ const services = [
   { 
     name: "Business Registration", 
     desc: "Start your company legally with ease.",
-    icon: Building2 
+    icon: Building2,
+    href: "/services/business-registration/private-limited"
   },
   { 
     name: "GST & Tax Filing", 
     desc: "Ensure seamless tax compliance.",
-    icon: FileText 
+    icon: FileText,
+    href: "/services/gst-and-tax/gst-registration"
   },
   { 
     name: "Trade Licences", 
     desc: "Get necessary local & state permits.",
-    icon: BadgeCheck 
+    icon: BadgeCheck,
+    href: "/services/licences/fssai"
   },
   { 
     name: "ISO Certifications", 
     desc: "Build global trust and quality standards.",
-    icon: Shield 
+    icon: Shield,
+    href: "/services/quality-certifications/iso-9001"
   },
   { 
     name: "Trademark Registration", 
     desc: "Protect your IP and brand identity.",
-    icon: Globe 
+    icon: Globe,
+    href: "/services/trademark-and-ip/trademark-registration"
   },
   { 
     name: "Govt. Registrations", 
     desc: "MSME, Startup India, and more.",
-    icon: Briefcase 
+    icon: Briefcase,
+    href: "/services/govt-registrations/udyam-msme"
   },
   { 
     name: "Accounting & Audits", 
     desc: "Maintain clear financial health.",
-    icon: Calculator 
+    icon: Calculator,
+    href: "/services/accounting/monthly-bookkeeping"
   },
   { 
     name: "Web Development", 
     desc: "Establish a strong digital presence.",
-    icon: Laptop 
+    icon: Laptop,
+    href: "/contact"
   },
 ];
 
@@ -138,25 +146,37 @@ export function SmeChallengesServicesSection() {
             {services.map((service, i) => (
               <div 
                 key={i}
-                className="group bg-white border border-gray-200 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:border-blue-500 cursor-pointer flex flex-col relative overflow-hidden"
+                className="group relative h-[320px] w-full [perspective:1000px] cursor-pointer"
               >
-                {/* Accent Line */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-[#dc2626] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative rounded-2xl">
+                  
+                  {/* Front of Card */}
+                  <div className="absolute inset-0 [backface-visibility:hidden] bg-white border border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center mb-6">
+                      <service.icon className="w-10 h-10 text-blue-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {service.name}
+                    </h3>
+                    <p className="text-sm font-bold text-gray-400 mt-2">Hover to explore <ArrowRight className="inline w-4 h-4 ml-1" /></p>
+                  </div>
 
-                <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300 group-hover:scale-110" />
-                </div>
-                
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-700 transition-colors">
-                  {service.name}
-                </h3>
-                
-                <p className="text-gray-500 mb-8 flex-grow leading-relaxed">
-                  {service.desc}
-                </p>
+                  {/* Back of Card */}
+                  <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#dc2626] rounded-2xl p-8 flex flex-col items-center justify-center text-center text-white shadow-xl border border-[#b91c1c]">
+                    <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4">
+                      <service.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-4 border-b border-white/20 pb-2">
+                      {service.name}
+                    </h3>
+                    <p className="text-white/90 mb-6 leading-relaxed font-medium">
+                      {service.desc}
+                    </p>
+                    <Link href={service.href} className="mt-auto inline-flex items-center text-sm font-bold bg-white text-[#dc2626] px-6 py-2 rounded-full hover:bg-gray-100 transition-colors">
+                      Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </div>
 
-                <div className="flex items-center text-sm font-bold text-blue-600 group-hover:text-[#dc2626] transition-colors mt-auto">
-                  Learn More <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-2" />
                 </div>
               </div>
             ))}

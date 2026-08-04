@@ -130,7 +130,7 @@ export function SmeIndustrySolutionsSection() {
   const [selectedIndustry, setSelectedIndustry] = useState<typeof industries[0] | null>(null);
 
   return (
-    <div className="py-24 bg-white border-b border-gray-100 relative overflow-hidden">
+    <div id="industries" className="py-24 bg-white border-b border-gray-100 relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-red-50/50 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
       

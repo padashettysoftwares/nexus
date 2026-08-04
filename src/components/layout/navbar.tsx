@@ -83,11 +83,11 @@ export function Navbar() {
               {activeMenu === 'industries' && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[500px] animate-in fade-in slide-in-from-top-2">
                   <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-2 p-6 gap-2">
-                    <Link href="/industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">🍽️ Food & Beverage</Link>
-                    <Link href="/industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">👕 Textiles & Apparel</Link>
-                    <Link href="/industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">💊 Pharmaceuticals</Link>
-                    <Link href="/industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">🚗 Automotive</Link>
-                    <Link href="/industries" className="col-span-2 mt-4 pt-4 border-t border-gray-100 text-sm font-bold text-blue-600 hover:text-blue-800 text-center flex items-center justify-center gap-1">View All Industries <ArrowRight className="w-4 h-4" /></Link>
+                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">🍽️ Food & Beverage</Link>
+                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">👕 Textiles & Apparel</Link>
+                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">💊 Pharmaceuticals</Link>
+                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">🚗 Automotive</Link>
+                    <Link href="/#industries" className="col-span-2 mt-4 pt-4 border-t border-gray-100 text-sm font-bold text-blue-600 hover:text-blue-800 text-center flex items-center justify-center gap-1">View All Industries <ArrowRight className="w-4 h-4" /></Link>
                   </div>
                 </div>
               )}
@@ -155,7 +155,7 @@ export function Navbar() {
         {isOpen && (
           <div className="absolute top-full left-0 w-full mt-2 bg-white/95 backdrop-blur-2xl border border-gray-100 rounded-2xl shadow-2xl overflow-hidden lg:hidden flex flex-col p-4 animate-in fade-in slide-in-from-top-4">
             <Link href="/services" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Services</Link>
-            <Link href="/industries" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Industries</Link>
+            <Link href="/#industries" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Industries</Link>
             <Link href="/about" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>About</Link>
             <Link href="/pricing" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Pricing</Link>
             <Link href="/resources" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Resources</Link>
