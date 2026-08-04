@@ -53,9 +53,6 @@ export function Footer() {
               <div className="relative w-14 h-14 rounded-xl overflow-hidden border border-white/20 shrink-0 bg-white">
                 <Image src="/Nexus-logo.jpeg" alt="Nexus Solutions Icon" fill className="object-cover" />
               </div>
-              <div className="relative w-40 h-10">
-                <Image src="/name.png" alt="Nexus Solutions" fill className="object-contain object-left brightness-0 invert" />
-              </div>
             </Link>
             <p className="text-white/80 mb-8 leading-relaxed max-w-sm">
               Nexus Solutions is a premier consultancy firm based in Kalaburagi, providing end-to-end legal, regulatory, and corporate compliance services.
