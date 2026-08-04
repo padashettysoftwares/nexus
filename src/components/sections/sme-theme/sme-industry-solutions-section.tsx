@@ -143,35 +143,39 @@ export function SmeIndustrySolutionsSection() {
   };
 
   return (
-    <div id="industries" className="py-24 bg-white border-b border-gray-100 relative overflow-hidden">
-      {/* Decorative Background */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-red-50/50 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
+    <div id="industries" className="py-24 bg-[#FCFBF8] border-b border-[#EAE7E0] relative overflow-hidden">
+      {/* Light theme red glow */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-red-100/50 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-red-50/80 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2"></div>
       
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-[1400px]">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 font-plus-jakarta mb-4">
-            Specialized <span className="text-[#dc2626]">Industry Solutions</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-stone-900 tracking-tight mb-4">
+            Specialized <span className="text-red-600">Industry Solutions</span>
           </h2>
-          <p className="text-gray-500 text-lg">
+          <p className="text-stone-600 text-lg">
             We understand that every industry has unique compliance challenges. Select your industry to discover our tailored solutions.
           </p>
         </div>
 
         <Dialog>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
             {industries.map((industry, i) => (
               <DialogTrigger 
                 key={i} 
                 onClick={() => setSelectedIndustry(industry)}
-                className="group bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] hover:border-[#dc2626]/30 relative overflow-hidden w-full h-full"
+                className="group bg-white border border-[#EAE7E0] rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-red-900/5 hover:-translate-y-2 hover:border-red-200 relative overflow-hidden w-full h-full"
               >
-                  <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${industry.gradient} flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
-                    <industry.icon className={`w-8 h-8 ${industry.iconColor}`} strokeWidth={1.5} />
+                  {/* Subtle red top border on hover */}
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                  <div className="w-16 h-16 rounded-2xl bg-[#FCFBF8] flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 border border-[#EAE7E0] group-hover:bg-red-50 group-hover:border-red-100">
+                    <industry.icon className="w-8 h-8 text-stone-400 group-hover:text-red-600 transition-colors" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[#dc2626] transition-colors">
+                  <h3 className="text-lg font-bold text-stone-800 mb-2 group-hover:text-red-600 transition-colors">
                     {industry.name}
                   </h3>
-                  <p className="text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 rounded-full mt-2 group-hover:bg-red-50 transition-colors">
+                  <p className="text-xs font-bold text-stone-500 bg-stone-100 px-3 py-1 rounded-full group-hover:bg-red-100 group-hover:text-red-700 transition-colors border border-[#EAE7E0]">
                     {industry.projects} Projects
                   </p>
               </DialogTrigger>

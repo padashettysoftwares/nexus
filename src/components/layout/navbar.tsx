@@ -139,12 +139,13 @@ export function Navbar() {
                 style={{ visibility: searchOpen ? 'visible' : 'hidden' }}
               />
             </div>
-            <button onClick={() => setModalOpen(true)}>
-              <Button className="rounded-full px-7 h-12 bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 text-white font-bold shadow-lg shadow-blue-500/30 transition-all hover:shadow-blue-500/50 hover:-translate-y-0.5 group flex items-center gap-2">
-                Book Appointment
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </button>
+            <Button 
+              onClick={() => setModalOpen(true)}
+              className="rounded-full px-7 h-12 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-bold shadow-lg shadow-red-500/30 transition-all hover:shadow-red-500/50 hover:-translate-y-0.5 group flex items-center gap-2"
+            >
+              Book Appointment
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -163,9 +164,12 @@ export function Navbar() {
             <Link href="/resources" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Resources</Link>
             <Link href="/contact" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Contact</Link>
             <div className="pt-4 mt-2 border-t border-gray-100 flex justify-center">
-              <button className="w-full" onClick={() => { setIsOpen(false); setModalOpen(true); }}>
-                <Button className="w-full rounded-full h-12 bg-gradient-to-r from-blue-700 to-blue-500 text-white font-bold shadow-lg">Book Appointment</Button>
-              </button>
+              <Button 
+                onClick={() => { setIsOpen(false); setModalOpen(true); }}
+                className="w-full rounded-full h-12 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-bold shadow-lg shadow-red-500/30"
+              >
+                Book Appointment
+              </Button>
             </div>
           </div>
         )}
