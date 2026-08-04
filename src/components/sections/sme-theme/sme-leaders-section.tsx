@@ -15,7 +15,7 @@ export function SmeLeadersSection() {
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-[1400px]">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-600 font-plus-jakarta">
-            Leaders In <span className="text-[#f97316]">Business Consulting</span>
+            Leaders In <span className="text-[#dc2626]">Business Consulting</span>
           </h2>
         </div>
         
