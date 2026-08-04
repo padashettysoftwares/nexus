@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { 
   Pizza, Shirt, Plane, Coffee, Car, FlaskConical, ShoppingCart, 
-  Wrench, Pill, Settings, Cpu, Zap, ArrowRight, CheckCircle2 
+  Wrench, Pill, Settings, Cpu, Zap, CheckCircle2, MessageCircle, Phone
 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -128,6 +129,18 @@ const industries = [
 
 export function SmeIndustrySolutionsSection() {
   const [selectedIndustry, setSelectedIndustry] = useState<typeof industries[0] | null>(null);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleIndustryConsult = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("ind-name") as string;
+    const phone = formData.get("ind-phone") as string;
+    const industry = selectedIndustry?.name || "General";
+    const message = encodeURIComponent(`Hello Nexus Solutions! 👋\n\nI am interested in compliance services for the *${industry} Industry*.\n\nName: ${name}\nPhone: +91 ${phone}\n\nPlease provide more details and contact me. Thank you!`);
+    window.open(`https://wa.me/919483486111?text=${message}`, "_blank");
+    setFormSubmitted(true);
+  };
 
   return (
     <div id="industries" className="py-24 bg-white border-b border-gray-100 relative overflow-hidden">
@@ -165,56 +178,99 @@ export function SmeIndustrySolutionsSection() {
             ))}
           </div>
 
-          <DialogContent className="sm:max-w-2xl bg-white border border-gray-200 shadow-2xl rounded-2xl z-50 p-0 overflow-hidden">
-            {/* Modal Image/Header Header */}
-            <div className={`h-40 w-full bg-gradient-to-r ${selectedIndustry?.gradient || 'from-gray-100 to-gray-50'} relative flex items-center justify-center overflow-hidden`}>
-               {/* Abstract pattern */}
+          <DialogContent className="sm:max-w-2xl bg-white border border-gray-200 shadow-2xl rounded-2xl z-50 p-0 overflow-hidden max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className={`h-32 sm:h-40 w-full bg-gradient-to-r ${selectedIndustry?.gradient || 'from-gray-100 to-gray-50'} relative flex items-center justify-center overflow-hidden`}>
                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
                {selectedIndustry && <selectedIndustry.icon className={`w-32 h-32 opacity-20 ${selectedIndustry.iconColor} absolute -right-4 -bottom-4`} />}
                
                <div className="relative z-10 flex flex-col items-center text-center px-6">
-                 <div className="w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-3">
-                   {selectedIndustry && <selectedIndustry.icon className={`w-8 h-8 ${selectedIndustry.iconColor}`} />}
+                 <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-2 sm:mb-3">
+                   {selectedIndustry && <selectedIndustry.icon className={`w-7 h-7 sm:w-8 sm:h-8 ${selectedIndustry.iconColor}`} />}
                  </div>
-                 <DialogTitle className="text-3xl font-extrabold text-gray-900 tracking-tight">
-                   {selectedIndustry?.name} Industry Compliance
+                 <DialogTitle className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+                   {selectedIndustry?.name} Industry
                  </DialogTitle>
                </div>
             </div>
 
-            <div className="p-8">
-              <DialogDescription className="text-base text-gray-600 mb-6 font-medium">
-                Nexus Solutions provides end-to-end legal, regulatory, and compliance assistance strictly tailored to the dynamic needs of the {selectedIndustry?.name} industry.
+            <div className="p-5 sm:p-8">
+              <DialogDescription className="text-sm sm:text-base text-gray-600 mb-5 font-medium">
+                Nexus Solutions provides end-to-end legal, regulatory, and compliance assistance tailored for the {selectedIndustry?.name} industry.
               </DialogDescription>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Services List */}
                 <div>
-                  <h4 className="font-bold text-gray-900 mb-4 uppercase text-xs tracking-widest flex items-center gap-2">
+                  <h4 className="font-bold text-gray-900 mb-3 uppercase text-xs tracking-widest flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#dc2626]"></span> Key Services Included
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2.5">
                     {selectedIndustry?.specs.map((spec, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                        <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                         <span className="text-gray-700 text-sm font-medium">{spec}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
-                {/* Pricing & CTA */}
-                <div className="bg-gray-50 rounded-xl border border-gray-100 p-6 flex flex-col justify-center text-center">
-                  <p className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-2">Packages Starting From</p>
-                  <div className="flex items-start justify-center mb-6">
-                    <span className="text-2xl font-bold text-gray-400 mt-1 mr-1">₹</span>
-                    <span className="text-5xl font-extrabold text-gray-900">{selectedIndustry?.price}</span>
-                  </div>
-                  
-                  <Button className="w-full bg-[#dc2626] hover:bg-[#b91c1c] text-white font-bold py-6 rounded-lg shadow-lg transition-transform hover:-translate-y-1 mb-3 text-base">
-                    Book Free Consultation
-                  </Button>
-                  <p className="text-xs text-gray-400">No hidden fees. 100% transparent pricing.</p>
+                {/* Consultation Form */}
+                <div className="bg-gray-50 rounded-xl border border-gray-100 p-5">
+                  {!formSubmitted ? (
+                    <>
+                      <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Contact for More Information</p>
+                      <p className="text-sm text-gray-600 mb-4">Get a free consultation for <strong>{selectedIndustry?.name}</strong> compliance.</p>
+                      <form onSubmit={handleIndustryConsult} className="space-y-3">
+                        <div>
+                          <Label htmlFor="ind-name" className="text-xs font-bold text-gray-700 mb-1 block">Your Name</Label>
+                          <Input
+                            id="ind-name"
+                            name="ind-name"
+                            required
+                            placeholder="Rahul Sharma"
+                            className="h-10 bg-white border-gray-200 rounded-lg text-sm"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="ind-phone" className="text-xs font-bold text-gray-700 mb-1 block">Phone Number</Label>
+                          <div className="flex">
+                            <div className="flex items-center px-2.5 bg-gray-100 border border-r-0 border-gray-200 rounded-l-lg text-xs font-bold text-gray-600">
+                              🇮🇳 +91
+                            </div>
+                            <Input
+                              id="ind-phone"
+                              name="ind-phone"
+                              type="tel"
+                              required
+                              maxLength={10}
+                              placeholder="98765 43210"
+                              className="h-10 bg-white border-gray-200 rounded-l-none rounded-r-lg text-sm"
+                            />
+                          </div>
+                        </div>
+                        <Button
+                          type="submit"
+                          className="w-full h-10 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-bold rounded-lg text-sm flex items-center justify-center gap-2 shadow-md"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          Book via WhatsApp
+                        </Button>
+                      </form>
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center text-center py-4">
+                      <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-3">
+                        <CheckCircle2 className="w-8 h-8 text-green-500" />
+                      </div>
+                      <h4 className="text-lg font-extrabold text-gray-900 mb-1">Thank You! 🎉</h4>
+                      <p className="text-gray-500 text-sm mb-3">Request sent! We will get back to you <strong>shortly.</strong></p>
+                      <div className="flex items-center gap-2 bg-gray-50 border border-gray-100 rounded-lg p-3 w-full">
+                        <Phone className="w-4 h-4 text-green-600 shrink-0" />
+                        <p className="text-xs font-bold text-gray-700">+91 9483486111 / +91 8073726564</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
