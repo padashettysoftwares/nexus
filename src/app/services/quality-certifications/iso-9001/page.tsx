@@ -34,14 +34,14 @@ export default function ISO9001Page() {
           <div className="lg:col-span-8 space-y-20">
             
             <section id="overview">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Overview</h2>
-              <div className="prose prose-lg text-gray-600 max-w-none">
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Overview</h2>
+              <div className="prose prose-lg text-text-secondary max-w-none">
                 <p>
                   ISO 9001:2015 specifies requirements for a quality management system (QMS). Organizations use the standard to demonstrate the ability to consistently provide products and services that meet customer and regulatory requirements.
                 </p>
-                <div className="bg-blue-50/50 rounded-2xl p-6 border border-blue-100 mt-8">
-                  <h4 className="text-lg font-bold text-[#1E3A8A] mb-2">Why is it important?</h4>
-                  <ul className="space-y-2 list-disc list-inside text-gray-700">
+                <div className="bg-surface-alt rounded-2xl p-6 border border-border mt-8">
+                  <h4 className="text-lg font-bold text-primary mb-2">Why is it important?</h4>
+                  <ul className="space-y-2 list-disc list-inside text-text-secondary">
                     <li>It is often a mandatory prerequisite for participating in Government and PSU tenders.</li>
                     <li>It instills extreme confidence in B2B clients and international buyers.</li>
                     <li>It helps identify and address risks in your business operations.</li>
@@ -51,7 +51,7 @@ export default function ISO9001Page() {
             </section>
 
             <section id="documents">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Required Documents</h2>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Required Documents</h2>
               <DocumentChecklist 
                 categories={[
                   {
@@ -79,7 +79,7 @@ export default function ISO9001Page() {
             </section>
 
             <section id="process">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Certification Process</h2>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Certification Process</h2>
               <ProcessTimeline 
                 steps={[
                   {
@@ -112,7 +112,7 @@ export default function ISO9001Page() {
             </section>
 
             <section id="pricing">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Pricing Breakdown (IAF Approved)</h2>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Pricing Breakdown (IAF Approved)</h2>
               <FeeBreakdown 
                 professionalFee={4999}
                 governmentFee={2000}
@@ -123,7 +123,7 @@ export default function ISO9001Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Frequently Asked Questions</h2>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Frequently Asked Questions</h2>
               <ServiceFAQ 
                 faqs={[
                   {

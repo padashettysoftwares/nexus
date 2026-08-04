@@ -35,17 +35,17 @@ export default function PrivateLimitedPage() {
             
             {/* Overview Section */}
             <section id="overview">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Overview</h2>
-              <div className="prose prose-lg text-gray-600 max-w-none">
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Overview</h2>
+              <div className="prose prose-lg text-text-secondary max-w-none">
                 <p>
                   A Private Limited Company (Pvt Ltd) is a privately held small business entity. This type of business entity limits owner liability to their shares, restricts shareholders from publicly trading shares, and caps the maximum number of shareholders to 200.
                 </p>
                 <p>
                   It is the most highly recommended business structure for startups and growing businesses in India because it allows outside funding (Angel Investors/VCs), offers ESOPs to employees, and provides significant tax advantages under the Startup India scheme.
                 </p>
-                <div className="bg-blue-50/50 rounded-2xl p-6 border border-blue-100 mt-8">
-                  <h4 className="text-lg font-bold text-[#1E3A8A] mb-2">Who should register?</h4>
-                  <ul className="space-y-2 list-disc list-inside text-gray-700">
+                <div className="bg-surface-alt rounded-2xl p-6 border border-border mt-8">
+                  <h4 className="text-lg font-bold text-primary mb-2">Who should register?</h4>
+                  <ul className="space-y-2 list-disc list-inside text-text-secondary">
                     <li>Startups looking to raise venture capital or angel investment.</li>
                     <li>Businesses with high revenue potential and multiple co-founders.</li>
                     <li>Tech companies planning to issue ESOPs to employees.</li>
@@ -57,8 +57,8 @@ export default function PrivateLimitedPage() {
 
             {/* Documents Section */}
             <section id="documents">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Required Documents</h2>
-              <p className="text-gray-600 mb-8">Please ensure all documents are clear, legible, and self-attested where necessary.</p>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Required Documents</h2>
+              <p className="text-text-secondary mb-8">Please ensure all documents are clear, legible, and self-attested where necessary.</p>
               <DocumentChecklist 
                 categories={[
                   {
@@ -86,7 +86,7 @@ export default function PrivateLimitedPage() {
 
             {/* Process Section */}
             <section id="process">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Registration Process</h2>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Registration Process</h2>
               <ProcessTimeline 
                 steps={[
                   {
@@ -120,7 +120,7 @@ export default function PrivateLimitedPage() {
 
             {/* Fees Section */}
             <section id="pricing">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Pricing Breakdown</h2>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Pricing Breakdown</h2>
               <FeeBreakdown 
                 professionalFee={4999}
                 governmentFee={1500}
@@ -132,7 +132,7 @@ export default function PrivateLimitedPage() {
 
             {/* FAQ Section */}
             <section id="faq">
-              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Frequently Asked Questions</h2>
+              <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Frequently Asked Questions</h2>
               <ServiceFAQ 
                 faqs={[
                   {

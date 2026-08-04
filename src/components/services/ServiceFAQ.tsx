@@ -25,19 +25,19 @@ export function ServiceFAQ({ faqs }: ServiceFAQProps) {
           viewport={{ once: true }}
           transition={{ delay: i * 0.05 }}
           key={i} 
-          className={`border rounded-2xl overflow-hidden transition-all duration-300 ${openIndex === i ? 'border-[#1E3A8A] bg-blue-50/30 shadow-md' : 'border-gray-200 bg-white hover:border-blue-200'}`}
+          className={`border rounded-2xl overflow-hidden transition-all duration-300 ${openIndex === i ? 'border-primary bg-surface-alt shadow-md' : 'border-border bg-white hover:border-primary/50'}`}
         >
           <button
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
             className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
           >
             <span className="flex items-center gap-4">
-              <HelpCircle className={`w-5 h-5 shrink-0 transition-colors ${openIndex === i ? 'text-[#1E3A8A]' : 'text-gray-400'}`} />
-              <span className={`font-bold text-lg ${openIndex === i ? 'text-[#1E3A8A]' : 'text-gray-800'}`}>
+              <HelpCircle className={`w-5 h-5 shrink-0 transition-colors ${openIndex === i ? 'text-primary' : 'text-text-secondary'}`} />
+              <span className={`font-bold text-lg ${openIndex === i ? 'text-primary' : 'text-text-primary'}`}>
                 {faq.q}
               </span>
             </span>
-            <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 shrink-0 ${openIndex === i ? 'rotate-180 text-[#1E3A8A]' : ''}`} />
+            <ChevronDown className={`w-5 h-5 text-text-secondary transition-transform duration-300 shrink-0 ${openIndex === i ? 'rotate-180 text-primary' : ''}`} />
           </button>
           
           <AnimatePresence>
@@ -48,7 +48,7 @@ export function ServiceFAQ({ faqs }: ServiceFAQProps) {
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                <div className="px-6 pb-6 pt-2 pl-14 pr-10 text-gray-600 leading-relaxed">
+                <div className="px-6 pb-6 pt-2 pl-14 pr-10 text-text-secondary leading-relaxed">
                   {faq.a}
                 </div>
               </motion.div>
