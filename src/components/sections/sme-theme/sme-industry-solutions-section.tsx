@@ -147,11 +147,11 @@ export function SmeIndustrySolutionsSection() {
         <Dialog>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {industries.map((industry, i) => (
-              <DialogTrigger asChild key={i}>
-                <div 
-                  onClick={() => setSelectedIndustry(industry)}
-                  className="group bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] hover:border-[#dc2626]/30 relative overflow-hidden"
-                >
+              <DialogTrigger 
+                key={i} 
+                onClick={() => setSelectedIndustry(industry)}
+                className="group bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] hover:border-[#dc2626]/30 relative overflow-hidden w-full h-full"
+              >
                   <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${industry.gradient} flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
                     <industry.icon className={`w-8 h-8 ${industry.iconColor}`} strokeWidth={1.5} />
                   </div>
@@ -161,7 +161,6 @@ export function SmeIndustrySolutionsSection() {
                   <p className="text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 rounded-full mt-2 group-hover:bg-red-50 transition-colors">
                     {industry.projects} Projects
                   </p>
-                </div>
               </DialogTrigger>
             ))}
           </div>
