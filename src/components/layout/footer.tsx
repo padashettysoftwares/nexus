@@ -70,7 +70,6 @@ export function Footer() {
               <span className="w-2 h-2 rounded-full bg-white/80"></span> Quick Links
             </h4>
             <ul className="space-y-3">
-              <li><Link href="/about" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> About Us</Link></li>
               <li><Link href="/services" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> All Services</Link></li>
               <li><Link href="/industries" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> Industries</Link></li>
               <li><Link href="/resources" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> Resources</Link></li>

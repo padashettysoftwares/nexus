@@ -15,6 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ResponsiveCarousel } from "@/components/ui/responsive-carousel";
 
 const industries = [
   { 
@@ -159,12 +160,12 @@ export function SmeIndustrySolutionsSection() {
         </div>
 
         <Dialog>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+          <ResponsiveCarousel desktopClassName="max-w-6xl mx-auto" mobileGapClassName="gap-4 md:gap-6 lg:gap-6">
             {industries.map((industry, i) => (
               <DialogTrigger 
                 key={i} 
                 onClick={() => setSelectedIndustry(industry)}
-                className="group bg-white border border-[#EAE7E0] rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-red-900/5 hover:-translate-y-2 hover:border-red-200 relative overflow-hidden w-full h-full"
+                className="group bg-white border border-[#EAE7E0] rounded-3xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-red-900/5 hover:-translate-y-2 hover:border-red-200 relative overflow-hidden w-[82vw] sm:w-[260px] md:w-[280px] lg:w-[280px] shrink-0 snap-start flex-none h-full min-h-[220px]"
               >
                   {/* Subtle red top border on hover */}
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -180,7 +181,7 @@ export function SmeIndustrySolutionsSection() {
                   </p>
               </DialogTrigger>
             ))}
-          </div>
+          </ResponsiveCarousel>
 
           <DialogContent className="sm:max-w-2xl bg-white border border-gray-200 shadow-2xl rounded-2xl z-50 p-0 overflow-hidden max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}

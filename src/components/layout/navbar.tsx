@@ -115,9 +115,6 @@ export function Navbar() {
               )}
             </div>
             
-            <Link href="/about" className="text-base font-bold text-gray-800 hover:text-blue-700 transition-colors">
-              About
-            </Link>
             <Link href="/pricing" className="text-base font-bold text-gray-800 hover:text-blue-700 transition-colors">
               Pricing
             </Link>
@@ -159,7 +156,6 @@ export function Navbar() {
           <div className="absolute top-full left-0 w-full mt-2 bg-white/95 backdrop-blur-2xl border border-gray-100 rounded-2xl shadow-2xl overflow-hidden lg:hidden flex flex-col p-4 animate-in fade-in slide-in-from-top-4">
             <Link href="/services" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Services</Link>
             <Link href="/#industries" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Industries</Link>
-            <Link href="/about" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>About</Link>
             <Link href="/pricing" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Pricing</Link>
             <Link href="/resources" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Resources</Link>
             <Link href="/contact" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Contact</Link>

@@ -17,11 +17,13 @@ export function StickyBottomBar() {
             <span>Need expert advice? Get a Free Consultation</span>
           </div>
           
-          <button onClick={() => setModalOpen(true)}>
-            <Button variant="outline" className="bg-white text-[#dc2626] hover:bg-red-50 hover:text-[#b91c1c] border-transparent font-bold text-sm md:text-base px-6 py-2 h-auto flex items-center gap-2 rounded-full shadow-md">
-              Book Now <ArrowRight className="w-4 h-4" />
-            </Button>
-          </button>
+          <Button 
+            onClick={() => setModalOpen(true)}
+            variant="outline" 
+            className="bg-white text-[#dc2626] hover:bg-red-50 hover:text-[#b91c1c] border-transparent font-bold text-sm md:text-base px-6 py-2 h-auto flex items-center gap-2 rounded-full shadow-md"
+          >
+            Book Now <ArrowRight className="w-4 h-4" />
+          </Button>
         </div>
       </div>
       <BookConsultationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />

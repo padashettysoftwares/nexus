@@ -44,6 +44,15 @@ h1, h2, h3, h4, h5, h6 {
   background: #d4cbb8;
 }
 
+/* Hide scrollbar for mobile carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 @layer base {
   .theme {
   --font-heading: var(--font-sans);
