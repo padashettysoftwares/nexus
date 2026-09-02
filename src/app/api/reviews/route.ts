@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-static";
+
 export async function GET() {
   const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
   const GOOGLE_PLACE_ID = process.env.GOOGLE_PLACE_ID;
