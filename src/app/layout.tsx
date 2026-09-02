@@ -18,7 +18,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.nexussolutions.in"),
+  metadataBase: new URL("https://www.nexusolutions.in"),
   title: {
     default: "Nexus Solutions | Top Business, MSME & ISO Consultant in Karnataka",
     template: "%s | Nexus Solutions",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://www.nexussolutions.in",
+    url: "https://www.nexusolutions.in",
     siteName: "Nexus Solutions",
     title: "Nexus Solutions | Top Business & ISO Consultant in Karnataka",
     description: "Expert Company Registration, GST, FSSAI, ISO, Trademark, Accounting, and Web Development services across Karnataka and South India.",
@@ -63,9 +63,9 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "Nexus Solutions",
-    image: "https://www.nexussolutions.in/logo.png",
-    "@id": "https://www.nexussolutions.in",
-    url: "https://www.nexussolutions.in",
+    image: "https://www.nexusolutions.in/logo.png",
+    "@id": "https://www.nexusolutions.in",
+    url: "https://www.nexusolutions.in",
     telephone: "+91-9483486111",
     address: {
       "@type": "PostalAddress",

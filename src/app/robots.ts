@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/portal/', '/api/', '/admin/'],
     },
-    sitemap: 'https://www.nexussolutions.in/sitemap.xml',
+    sitemap: 'https://www.nexusolutions.in/sitemap.xml',
   }
 }
