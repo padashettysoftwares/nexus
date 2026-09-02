@@ -47,37 +47,46 @@ export function Footer() {
 
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-12">
-          
-          <div className="lg:col-span-4">
-            <Link href="/" className="flex items-center gap-3 mb-6">
+
+          <div className="lg:col-span-3">
+            <Link href="/" className="flex items-center gap-3 mb-6" aria-label="Nexus Solutions home">
               <div className="relative w-14 h-14 rounded-xl overflow-hidden border border-white/20 shrink-0 bg-white">
-                <Image src="/Nexus-logo.jpeg" alt="Nexus Solutions Icon" fill className="object-cover" />
+                <Image src="/Nexus-logo.jpeg" alt="Nexus Solutions logo" fill className="object-cover" />
               </div>
             </Link>
             <p className="text-white/80 mb-8 leading-relaxed max-w-sm">
-              Nexus Solutions is a premier consultancy firm based in Kalaburagi, providing end-to-end legal, regulatory, and corporate compliance services.
+              Nexus Solutions is an MSME-registered, ISO 9001:2015 business consulting firm in Kalaburagi (Gulbarga), Karnataka, providing end-to-end registration, tax, licensing and compliance services for startups and SMEs.
             </p>
-            <div className="flex gap-3">
-              <Link href="#" className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center hover:bg-white hover:text-[#991b1b] transition-colors text-sm font-bold border border-white/10">FB</Link>
-              <Link href="#" className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center hover:bg-white hover:text-[#991b1b] transition-colors text-sm font-bold border border-white/10">X</Link>
-              <Link href="#" className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center hover:bg-white hover:text-[#991b1b] transition-colors text-sm font-bold border border-white/10">IG</Link>
-              <Link href="#" className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center hover:bg-white hover:text-[#991b1b] transition-colors text-sm font-bold border border-white/10">IN</Link>
-            </div>
           </div>
 
           <div className="lg:col-span-2">
             <h4 className="text-lg font-bold mb-6 font-plus-jakarta text-white flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-white/80"></span> Quick Links
+              <span className="w-2 h-2 rounded-full bg-white/80"></span> Company
             </h4>
             <ul className="space-y-3">
               <li><Link href="/services" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> All Services</Link></li>
-              <li><Link href="/industries" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> Industries</Link></li>
-              <li><Link href="/resources" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> Resources</Link></li>
+              <li><Link href="/#industries" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> Industries</Link></li>
+              <li><Link href="/pricing" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> Pricing</Link></li>
               <li><Link href="/contact" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /> Contact Us</Link></li>
             </ul>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
+            <h4 className="text-lg font-bold mb-6 font-plus-jakarta text-white flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-white/80"></span> Popular Services
+            </h4>
+            <ul className="space-y-3">
+              <li><Link href="/services/business-registration/private-limited" className="text-white/80 hover:text-white transition-colors text-sm">Private Limited Registration</Link></li>
+              <li><Link href="/services/gst-and-tax/gst-registration" className="text-white/80 hover:text-white transition-colors text-sm">GST Registration</Link></li>
+              <li><Link href="/services/licences/fssai" className="text-white/80 hover:text-white transition-colors text-sm">FSSAI Food Licence</Link></li>
+              <li><Link href="/services/quality-certifications/iso-9001" className="text-white/80 hover:text-white transition-colors text-sm">ISO 9001 Certification</Link></li>
+              <li><Link href="/services/trademark-and-ip/trademark-registration" className="text-white/80 hover:text-white transition-colors text-sm">Trademark Registration</Link></li>
+              <li><Link href="/services/govt-registrations/udyam-msme" className="text-white/80 hover:text-white transition-colors text-sm">Udyam / MSME Registration</Link></li>
+              <li><Link href="/services/accounting/monthly-bookkeeping" className="text-white/80 hover:text-white transition-colors text-sm">Accounting &amp; Bookkeeping</Link></li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
             <h4 className="text-lg font-bold mb-6 font-plus-jakarta text-white flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-white/80"></span> Contact Info
             </h4>
@@ -88,11 +97,16 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center shrink-0 border border-white/10"><Phone className="w-4 h-4 text-white" /></div>
-                <span className="text-white/80 text-sm">+91 9483486111<br/>+91 8073726564</span>
+                <span className="text-white/80 text-sm">
+                  <a href="tel:+919483486111" className="hover:text-white">+91 94834 86111</a><br/>
+                  <a href="tel:+918073726564" className="hover:text-white">+91 80737 26564</a>
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center shrink-0 border border-white/10"><Mail className="w-4 h-4 text-white" /></div>
-                <span className="text-white/80 text-sm">nexussolutionsglb@gmail.com<br/>info@nexusolutions.com</span>
+                <span className="text-white/80 text-sm">
+                  <a href="mailto:nexussolutionsglb@gmail.com" className="hover:text-white break-all">nexussolutionsglb@gmail.com</a>
+                </span>
               </li>
             </ul>
           </div>

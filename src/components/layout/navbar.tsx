@@ -58,15 +58,15 @@ export function Navbar() {
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-[#dc2626]"></div>
                     <div>
                       <h5 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-2 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500"></span> Business Setup</h5>
-                      <Link href="/services" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Private Limited Registration</Link>
-                      <Link href="/services" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">LLP Registration</Link>
-                      <Link href="/services" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Partnership Firm</Link>
+                      <Link href="/services/business-registration/private-limited" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Private Limited Registration</Link>
+                      <Link href="/services/govt-registrations/udyam-msme" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Udyam / MSME Registration</Link>
+                      <Link href="/services/trademark-and-ip/trademark-registration" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Trademark Registration</Link>
                     </div>
                     <div>
-                      <h5 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-2 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#dc2626]"></span> Tax & Compliance</h5>
-                      <Link href="/services" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">GST Registration & Filing</Link>
-                      <Link href="/services" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">Income Tax Returns</Link>
-                      <Link href="/services" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">Annual ROC Compliance</Link>
+                      <h5 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-2 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#dc2626]"></span> Tax &amp; Compliance</h5>
+                      <Link href="/services/gst-and-tax/gst-registration" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">GST Registration &amp; Filing</Link>
+                      <Link href="/services/licences/fssai" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">FSSAI Food Licence</Link>
+                      <Link href="/services/quality-certifications/iso-9001" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">ISO 9001 Certification</Link>
                     </div>
                   </div>
                 </div>
@@ -95,28 +95,12 @@ export function Navbar() {
               )}
             </div>
 
-            {/* Resources Dropdown */}
-            <div 
-              className="relative h-full flex items-center"
-              onMouseEnter={() => handleMenuHover('resources')}
-              onMouseLeave={() => handleMenuHover(null)}
-            >
-              <button className="flex items-center gap-1.5 text-base font-bold text-gray-800 hover:text-blue-700 transition-colors py-2 group">
-                Resources <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeMenu === 'resources' ? "rotate-180 text-blue-700" : "text-gray-400 group-hover:text-blue-700"}`} />
-              </button>
-              {activeMenu === 'resources' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[300px] animate-in fade-in slide-in-from-top-2">
-                  <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col p-3">
-                    <Link href="/blog" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Knowledge Base & Blog</Link>
-                    <Link href="/case-studies" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Case Studies</Link>
-                    <Link href="/webinars" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Webinars & Events</Link>
-                  </div>
-                </div>
-              )}
-            </div>
-            
             <Link href="/pricing" className="text-base font-bold text-gray-800 hover:text-blue-700 transition-colors">
               Pricing
+            </Link>
+
+            <Link href="/contact" className="text-base font-bold text-gray-800 hover:text-blue-700 transition-colors">
+              Contact
             </Link>
           </nav>
 
@@ -157,7 +141,6 @@ export function Navbar() {
             <Link href="/services" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Services</Link>
             <Link href="/#industries" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Industries</Link>
             <Link href="/pricing" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Pricing</Link>
-            <Link href="/resources" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Resources</Link>
             <Link href="/contact" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Contact</Link>
             <div className="pt-4 mt-2 border-t border-gray-100 flex justify-center">
               <Button 

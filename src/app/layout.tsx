@@ -1,42 +1,59 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans, Geist } from "next/font/google";
-import { ProfessionalService, WithContext } from "schema-dts";
 import "./globals.css";
 import { ConditionalHeader, ConditionalFooter } from "@/components/layout/conditional-wrapper";
 import { cn } from "@/lib/utils";
+import { SITE_URL, organizationSchema, websiteSchema, jsonLd } from "@/lib/seo";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({subsets:['latin'],variable:'--font-sans', display: 'swap'});
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: 'swap'
 });
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta",
+  display: 'swap'
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.nexusolutions.in"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Nexus Solutions | Top Business, MSME & ISO Consultant in Karnataka",
+    default: "Nexus Solutions | Company Registration, GST, ISO & Trademark Consultants in Kalaburagi",
     template: "%s | Nexus Solutions",
   },
-  description: "Karnataka's premier business consultant. Expert in Company Registration, GST & Tax Filing, FSSAI & Trade Licences, ISO Certification, Trademark Registration, MSME/Udyam, Accounting & Audits, and Web Development across South India.",
-  keywords: ["Company Registration Karnataka", "GST Filing South India", "FSSAI Licence Kalaburagi", "ISO Certification Consultant", "Trademark Registration South India", "MSME Udyam Registration", "Startup India Registration", "Accounting & Audits Karnataka", "Business Web Development", "Business Consultant Kalaburagi", "Legal Compliance South India"],
+  description:
+    "Nexus Solutions is a business consulting firm in Kalaburagi (Gulbarga), Karnataka. Company registration, GST & income-tax filing, FSSAI & trade licences, ISO 9001 certification, trademark registration, Udyam/MSME, accounting and annual compliance for startups and SMEs.",
+  keywords: [
+    "business consultant Kalaburagi",
+    "company registration Kalaburagi",
+    "GST registration Gulbarga",
+    "FSSAI licence Kalaburagi",
+    "ISO certification Karnataka",
+    "trademark registration Kalaburagi",
+    "Udyam MSME registration",
+    "accounting services Kalaburagi",
+    "CA firm Gulbarga",
+  ],
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://www.nexusolutions.in",
+    url: SITE_URL,
     siteName: "Nexus Solutions",
-    title: "Nexus Solutions | Top Business & ISO Consultant in Karnataka",
-    description: "Expert Company Registration, GST, FSSAI, ISO, Trademark, Accounting, and Web Development services across Karnataka and South India.",
+    title: "Nexus Solutions | Company Registration, GST, ISO & Trademark Consultants in Kalaburagi",
+    description:
+      "Business registration, GST & tax filing, FSSAI & trade licences, ISO certification, trademark and MSME registration, accounting and compliance for startups and SMEs in Kalaburagi, Karnataka.",
+    images: [{ url: "/hero_premium_v2.png", width: 1200, height: 630, alt: "Nexus Solutions consultants in Kalaburagi, Karnataka" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nexus Solutions | Top Business & ISO Consultant",
-    description: "Expert MSME & ISO Certification across Karnataka and South India.",
+    title: "Nexus Solutions | Business, Tax & Compliance Consultants in Kalaburagi",
+    description:
+      "Company registration, GST, FSSAI, ISO, trademark, MSME, accounting and compliance for SMEs in Kalaburagi, Karnataka.",
+    images: ["/hero_premium_v2.png"],
   },
   robots: {
     index: true,
@@ -44,13 +61,13 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: 'wh4kYawkb7QKFeTZHfqzgjlyZesP-L-JQAzl3Oik-sA',
+    google: "wh4kYawkb7QKFeTZHfqzgjlyZesP-L-JQAzl3Oik-sA",
   },
 };
 
@@ -59,51 +76,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd: WithContext<ProfessionalService> = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "Nexus Solutions",
-    image: "https://www.nexusolutions.in/logo.png",
-    "@id": "https://www.nexusolutions.in",
-    url: "https://www.nexusolutions.in",
-    telephone: "+91-9483486111",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Kalaburagi",
-      addressRegion: "Karnataka",
-      addressCountry: "IN"
-    },
-    areaServed: ["Kalaburagi", "Bengaluru", "Hubli", "Mangaluru", "Karnataka", "South India", "India"],
-    priceRange: "₹₹",
-    description: "Top business consultant in Karnataka offering Private Limited Company Registration, GST & Tax Filing, Trade Licences (FSSAI), ISO Certification, Trademark Registration, MSME/Udyam, Accounting & Audits, and Web Development across South India.",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Corporate Services",
-      itemListElement: [
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Business Registration (Pvt Ltd, LLP, Partnership)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "GST, TDS & Income Tax Filing" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Trade Licences (FSSAI, Labour, Factory, Fire NOC)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Quality Certifications (ISO 9001, HACCP, GMP, Halal, Organic)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Trademark, Copyright & Patent Registration" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Import Export (IEC Code Registration)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Govt Registrations (Udyam MSME, Startup India, GeM, EPF)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Accounting, Bookkeeping & Payroll" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Services (Web Development, Logo Design)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Annual Compliance (ROC Filing, Director KYC)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Business Advisory & Virtual CFO" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Loans & Subsidies (Project Reports, MSME Subsidies)" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web App Development & Portals" } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Business Process Automation & Tech Integrations" } }
-      ]
-    }
-  };
-
   return (
-    <html lang="en" className={cn(inter.variable, plusJakartaSans.variable, "font-sans", geist.variable)}>
+    <html lang="en-IN" className={cn(inter.variable, plusJakartaSans.variable, "font-sans", geist.variable)}>
       <body className="antialiased min-h-screen flex flex-col selection:bg-primary selection:text-white bg-background text-text-primary">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={jsonLd(organizationSchema(), websiteSchema())}
         />
         <ConditionalHeader />
         <main className="flex-grow">

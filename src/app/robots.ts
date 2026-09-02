@@ -1,14 +1,16 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/portal/', '/api/', '/admin/'],
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/portal", "/billing", "/api/"],
     },
-    sitemap: 'https://www.nexusolutions.in/sitemap.xml',
-  }
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
+  };
 }

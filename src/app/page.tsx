@@ -3,23 +3,37 @@ import { SmeSectorInfoSection } from "@/components/sections/sme-theme/sme-sector
 import { SmeCompaniesAvailedSection } from "@/components/sections/sme-theme/sme-companies-availed-section";
 import { SmeChallengesServicesSection } from "@/components/sections/sme-theme/sme-challenges-services-section";
 import { SmeIndustrySolutionsSection } from "@/components/sections/sme-theme/sme-industry-solutions-section";
+import { SmeServiceAreasSection } from "@/components/sections/sme-theme/sme-service-areas-section";
 import { StickyBottomBar } from "@/components/sections/sme-theme/sticky-bottom-bar";
-import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Nexus Solutions | Complete Business Registration & Compliance Consultant",
-  description: "Get instant, top-tier business compliance. We are the premier experts for Company Registration, GST, FSSAI, ISO, Trademarks, MSME, Accounting, and Web Development in Kalaburagi, Karnataka and all of South India.",
-  keywords: ["Business Registration South India", "GST & Tax Filing Karnataka", "Trade Licences FSSAI", "ISO Certifications India", "Trademark Registration", "Startup India MSME", "Accounting & Audits Kalaburagi", "Web Development for Business", "Best Consultant Karnataka"],
-};
+export const metadata = pageMetadata({
+  title: "Nexus Solutions — Business, Tax & Compliance Consultants in Kalaburagi",
+  titleAbsolute: true,
+  description:
+    "Nexus Solutions is a business consulting firm in Kalaburagi (Gulbarga), Karnataka. Company registration, GST & income-tax filing, FSSAI & trade licences, ISO 9001 certification, trademark registration, Udyam/MSME, accounting and annual compliance for startups and SMEs.",
+  path: "/",
+  keywords: [
+    "business consultant Kalaburagi",
+    "company registration Kalaburagi",
+    "GST registration Gulbarga",
+    "ISO certification Karnataka",
+    "trademark registration Kalaburagi",
+    "CA firm Gulbarga",
+  ],
+});
 
 export default function Home() {
   return (
     <>
+      <JsonLd schemas={[breadcrumbSchema([{ name: "Home", path: "/" }])]} />
       <SmeHeroSection />
       <SmeSectorInfoSection />
       <SmeCompaniesAvailedSection />
       <SmeChallengesServicesSection />
       <SmeIndustrySolutionsSection />
+      <SmeServiceAreasSection />
       <StickyBottomBar />
     </>
   );

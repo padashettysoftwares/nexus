@@ -5,17 +5,66 @@ import { DocumentChecklist } from "@/components/services/DocumentChecklist";
 import { ProcessTimeline } from "@/components/services/ProcessTimeline";
 import { FeeBreakdown } from "@/components/services/FeeBreakdown";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 import React from "react";
 
-export const metadata = {
-  title: "Trademark Registration in Kalaburagi | Nexus Solutions",
-  description: "Protect your brand name and logo with Trademark Registration. Prevent competitors from copying your identity.",
-};
+const PATH = "/services/trademark-and-ip/trademark-registration";
+
+const FAQS = [
+  {
+    q: "When can I use the ™ and ® symbols?",
+    a: "You can use the ™ symbol immediately after we file the application and provide you with the acknowledgement receipt. You can only use the ® symbol after the trademark is officially registered (usually takes 6-12 months).",
+  },
+  {
+    q: "Is trademark registration valid worldwide?",
+    a: "No, a trademark registered in India is valid only within India. For global protection, you must file international applications through the Madrid Protocol.",
+  },
+  {
+    q: "What is an Examination Report (Objection)?",
+    a: "An objection occurs when the Trademark Examiner feels your mark is too similar to an existing one, or is generic. Our lawyers will draft and file a legal reply to overcome this (additional charges may apply).",
+  },
+  {
+    q: "What is the validity of a Trademark?",
+    a: "A registered trademark is valid for 10 years. It can be renewed indefinitely for subsequent 10-year periods.",
+  },
+];
+
+export const metadata = pageMetadata({
+  title: "Trademark Registration in Kalaburagi — File in 3 Days",
+  description:
+    "Register your brand name, logo or slogan with Nexus Solutions in Kalaburagi. Free trademark search across 45 classes, class selection, TM-A filing on the IP India portal and objection replies — start using the ™ symbol within 3 days.",
+  path: PATH,
+  keywords: [
+    "trademark registration Kalaburagi",
+    "brand name registration Gulbarga",
+    "logo trademark Karnataka",
+    "trademark search consultant",
+    "TM registration Kalaburagi",
+  ],
+});
 
 export default function TrademarkPage() {
   return (
     <div className="min-h-screen bg-white">
-      <ServiceHero 
+      <JsonLd
+        schemas={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Trademark Registration", path: PATH },
+          ]),
+          serviceSchema({
+            name: "Trademark Registration",
+            description:
+              "Trademark registration service in Kalaburagi, Karnataka: comprehensive trademark search, class selection, TM-A filing on the IP India portal and examination/objection replies.",
+            path: PATH,
+            serviceType: "Trademark registration",
+          }),
+          faqSchema(FAQS),
+        ]}
+      />
+      <ServiceHero
         category="Trademark & IP"
         title="Trademark Registration"
         description="Protect your brand identity, logo, and business name from being copied. Get legal ownership and start using the ™ symbol in just 3 days."
@@ -123,26 +172,7 @@ export default function TrademarkPage() {
 
             <section id="faq">
               <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Frequently Asked Questions</h2>
-              <ServiceFAQ 
-                faqs={[
-                  {
-                    q: "When can I use the ™ and ® symbols?",
-                    a: "You can use the ™ symbol immediately after we file the application and provide you with the acknowledgement receipt. You can only use the ® symbol after the trademark is officially registered (usually takes 6-12 months)."
-                  },
-                  {
-                    q: "Is trademark registration valid worldwide?",
-                    a: "No, a trademark registered in India is valid only within India. For global protection, you must file international applications through the Madrid Protocol."
-                  },
-                  {
-                    q: "What is an Examination Report (Objection)?",
-                    a: "An objection occurs when the Trademark Examiner feels your mark is too similar to an existing one, or is generic. Our lawyers will draft and file a legal reply to overcome this (additional charges may apply)."
-                  },
-                  {
-                    q: "What is the validity of a Trademark?",
-                    a: "A registered trademark is valid for 10 years. It can be renewed indefinitely for subsequent 10-year periods."
-                  }
-                ]}
-              />
+              <ServiceFAQ faqs={FAQS} />
             </section>
 
           </div>

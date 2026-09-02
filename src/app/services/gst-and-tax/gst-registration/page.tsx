@@ -5,17 +5,66 @@ import { DocumentChecklist } from "@/components/services/DocumentChecklist";
 import { ProcessTimeline } from "@/components/services/ProcessTimeline";
 import { FeeBreakdown } from "@/components/services/FeeBreakdown";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 import React from "react";
 
-export const metadata = {
-  title: "GST Registration in Kalaburagi | Nexus Solutions",
-  description: "Get your GST Registration completed in 3-5 days. Fast, online, and fully compliant GST services by experts.",
-};
+const PATH = "/services/gst-and-tax/gst-registration";
+
+const FAQS = [
+  {
+    q: "Is GST Registration mandatory for selling on Amazon/Flipkart?",
+    a: "Yes, if you wish to sell products on e-commerce platforms like Amazon, Flipkart, or Meesho, GST registration is mandatory regardless of your turnover.",
+  },
+  {
+    q: "Can I have multiple GST registrations on the same PAN?",
+    a: "Yes. If you operate businesses in different states, you must obtain a separate GST registration for each state. You can also opt for multiple registrations within the same state for different business verticals.",
+  },
+  {
+    q: "Do I have to pay GST every month?",
+    a: "Not necessarily. If your turnover is under ₹5 Crores, you can opt for the QRMP scheme to file returns quarterly. However, you must still pay the tax monthly if there is a tax liability.",
+  },
+  {
+    q: "What is the penalty for not registering under GST?",
+    a: "If an eligible business fails to register for GST, the penalty is 10% of the tax amount due, subject to a minimum of ₹10,000.",
+  },
+];
+
+export const metadata = pageMetadata({
+  title: "GST Registration in Kalaburagi — GSTIN in 3–5 Days",
+  description:
+    "Apply for GST registration in Kalaburagi and Gulbarga district with Nexus Solutions. Document check, GST REG-01 filing, ARN, Aadhaar authentication and GSTIN certificate in 3–5 working days, plus ongoing GST return filing.",
+  path: PATH,
+  keywords: [
+    "GST registration Kalaburagi",
+    "GST registration Gulbarga",
+    "GSTIN apply Karnataka",
+    "GST return filing Kalaburagi",
+    "GST consultant Gulbarga",
+  ],
+});
 
 export default function GSTRegistrationPage() {
   return (
     <div className="min-h-screen bg-white">
-      <ServiceHero 
+      <JsonLd
+        schemas={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "GST Registration", path: PATH },
+          ]),
+          serviceSchema({
+            name: "GST Registration",
+            description:
+              "GST registration and return-filing service in Kalaburagi, Karnataka: eligibility check, GST REG-01 application, ARN generation, Aadhaar authentication and issuance of GSTIN and Form REG-06.",
+            path: PATH,
+            serviceType: "GST registration",
+          }),
+          faqSchema(FAQS),
+        ]}
+      />
+      <ServiceHero
         category="GST & Tax"
         title="GST Registration"
         description="Mandatory for businesses crossing the ₹40 Lakhs turnover threshold (₹20 Lakhs for services). Apply online and get your GSTIN and Certificate in just 3-5 working days."
@@ -127,26 +176,7 @@ export default function GSTRegistrationPage() {
 
             <section id="faq">
               <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Frequently Asked Questions</h2>
-              <ServiceFAQ 
-                faqs={[
-                  {
-                    q: "Is GST Registration mandatory for selling on Amazon/Flipkart?",
-                    a: "Yes, if you wish to sell products on e-commerce platforms like Amazon, Flipkart, or Meesho, GST registration is mandatory regardless of your turnover."
-                  },
-                  {
-                    q: "Can I have multiple GST registrations on the same PAN?",
-                    a: "Yes. If you operate businesses in different states, you must obtain a separate GST registration for each state. You can also opt for multiple registrations within the same state for different business verticals."
-                  },
-                  {
-                    q: "Do I have to pay GST every month?",
-                    a: "Not necessarily. If your turnover is under ₹5 Crores, you can opt for the QRMP scheme to file returns quarterly. However, you must still pay the tax monthly if there is a tax liability."
-                  },
-                  {
-                    q: "What is the penalty for not registering under GST?",
-                    a: "If an eligible business fails to register for GST, the penalty is 10% of the tax amount due, subject to a minimum of ₹10,000."
-                  }
-                ]}
-              />
+              <ServiceFAQ faqs={FAQS} />
             </section>
 
           </div>

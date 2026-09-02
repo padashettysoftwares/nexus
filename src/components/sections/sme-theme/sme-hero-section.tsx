@@ -32,15 +32,11 @@ export function SmeHeroSection() {
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#3F3F46_1px,transparent_1px),linear-gradient(to_bottom,#3F3F46_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
         
-        {/* Soft, slow-moving ambient glows */}
-        <motion.div 
-          animate={{ rotate: 360, scale: [1, 1.05, 1] }} 
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        {/* Soft, static ambient glows (optimized for performance) */}
+        <div 
           className="absolute -top-[30%] -right-[10%] w-[70%] h-[90%] rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-100 via-red-50/40 to-transparent blur-[120px]" 
         />
-        <motion.div 
-          animate={{ rotate: -360, scale: [1, 1.1, 1] }} 
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        <div 
           className="absolute -bottom-[20%] -left-[10%] w-[60%] h-[80%] rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#EAE7E0] to-transparent blur-[120px]" 
         />
       </div>
@@ -70,7 +66,7 @@ export function SmeHeroSection() {
             {/* Illustration with Floating Stats */}
             <div className="relative w-full max-w-lg mt-2 hidden md:block">
               <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/10 ring-1 ring-white/5">
-                <Image src="/images/hero-consulting.png" alt="Consulting Team" fill className="object-cover" />
+                <Image src="/images/hero-consulting.png" alt="Consulting Team" fill className="object-cover" priority />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-80"></div>
               </div>
 

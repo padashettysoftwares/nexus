@@ -5,16 +5,65 @@ import { DocumentChecklist } from "@/components/services/DocumentChecklist";
 import { ProcessTimeline } from "@/components/services/ProcessTimeline";
 import { FeeBreakdown } from "@/components/services/FeeBreakdown";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 
-export const metadata = {
-  title: "Private Limited Company Registration in Kalaburagi | Nexus Solutions",
-  description: "Register your Private Limited Company with Nexus Solutions. Fast processing, transparent pricing, and expert CA assistance.",
-};
+const PATH = "/services/business-registration/private-limited";
+
+const FAQS = [
+  {
+    q: "How many minimum directors are required?",
+    a: "A minimum of 2 directors are required to register a Private Limited Company in India. The maximum limit is 15 directors.",
+  },
+  {
+    q: "Is it mandatory to have a commercial office space?",
+    a: "No, it is not mandatory. You can register your company at a residential address as long as you can provide a utility bill and an NOC from the property owner.",
+  },
+  {
+    q: "Do I need to be physically present during registration?",
+    a: "No, the entire process is 100% online. You just need to provide soft copies of the required documents and complete a video KYC for the Digital Signature.",
+  },
+  {
+    q: "What is the minimum capital required?",
+    a: "There is no minimum paid-up capital requirement anymore. You can start a Private Limited Company with an authorized capital of as low as ₹10,000.",
+  },
+];
+
+export const metadata = pageMetadata({
+  title: "Private Limited Company Registration in Kalaburagi",
+  description:
+    "Register a Private Limited Company in Kalaburagi and across Karnataka in 7–10 days — DSC, DIN, name approval, MOA/AOA, SPICe+ filing, PAN & TAN with expert CA support and transparent pricing from ₹4,999.",
+  path: PATH,
+  keywords: [
+    "private limited company registration Kalaburagi",
+    "Pvt Ltd registration Gulbarga",
+    "company registration Karnataka",
+    "startup registration Kalaburagi",
+    "SPICe+ filing consultant",
+  ],
+});
 
 export default function PrivateLimitedPage() {
   return (
     <div className="min-h-screen bg-white">
-      <ServiceHero 
+      <JsonLd
+        schemas={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Private Limited Company Registration", path: PATH },
+          ]),
+          serviceSchema({
+            name: "Private Limited Company Registration",
+            description:
+              "End-to-end Private Limited Company incorporation in Kalaburagi and Karnataka: DSC, DIN, name approval, MOA & AOA drafting and SPICe+ filing with the MCA, including PAN and TAN.",
+            path: PATH,
+            serviceType: "Company registration",
+          }),
+          faqSchema(FAQS),
+        ]}
+      />
+      <ServiceHero
         category="Business Registration"
         title="Private Limited Company Registration"
         description="The most popular legal structure for businesses in India. Get your company registered in 7-10 days with complete MCA compliance, PAN, TAN, and free expert consultation."
@@ -133,26 +182,7 @@ export default function PrivateLimitedPage() {
             {/* FAQ Section */}
             <section id="faq">
               <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Frequently Asked Questions</h2>
-              <ServiceFAQ 
-                faqs={[
-                  {
-                    q: "How many minimum directors are required?",
-                    a: "A minimum of 2 directors are required to register a Private Limited Company in India. The maximum limit is 15 directors."
-                  },
-                  {
-                    q: "Is it mandatory to have a commercial office space?",
-                    a: "No, it is not mandatory. You can register your company at a residential address as long as you can provide a utility bill and an NOC from the property owner."
-                  },
-                  {
-                    q: "Do I need to be physically present during registration?",
-                    a: "No, the entire process is 100% online. You just need to provide soft copies of the required documents and complete a video KYC for the Digital Signature."
-                  },
-                  {
-                    q: "What is the minimum capital required?",
-                    a: "There is no minimum paid-up capital requirement anymore. You can start a Private Limited Company with an authorized capital of as low as ₹10,000."
-                  }
-                ]}
-              />
+              <ServiceFAQ faqs={FAQS} />
             </section>
 
           </div>

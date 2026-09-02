@@ -5,17 +5,66 @@ import { DocumentChecklist } from "@/components/services/DocumentChecklist";
 import { ProcessTimeline } from "@/components/services/ProcessTimeline";
 import { FeeBreakdown } from "@/components/services/FeeBreakdown";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 import React from "react";
 
-export const metadata = {
-  title: "FSSAI Food License Registration | Nexus Solutions",
-  description: "Get your FSSAI Food License quickly and legally. Mandatory for all food businesses, restaurants, and cloud kitchens in India.",
-};
+const PATH = "/services/licences/fssai";
+
+const FAQS = [
+  {
+    q: "Is FSSAI mandatory for selling homemade food on Swiggy or Zomato?",
+    a: "Yes, it is strictly mandatory. Food delivery aggregators will not onboard you unless you provide a valid FSSAI 14-digit registration number, even if you are operating from a home kitchen.",
+  },
+  {
+    q: "What is the validity of an FSSAI License?",
+    a: "An FSSAI license can be issued for a period ranging from 1 year to a maximum of 5 years. You must renew it 30 days before its expiry.",
+  },
+  {
+    q: "What is the penalty for running a food business without an FSSAI license?",
+    a: "Operating without an FSSAI license is an offense punishable by imprisonment of up to 6 months and a penalty of up to ₹5,00,000.",
+  },
+  {
+    q: "Do I need a separate FSSAI license for different locations?",
+    a: "Yes. If your business operates in multiple locations, you must obtain a separate State/Basic license for each premises, and one Central License for the Head Office.",
+  },
+];
+
+export const metadata = pageMetadata({
+  title: "FSSAI Food Licence Registration in Kalaburagi",
+  description:
+    "Get your FSSAI Basic, State or Central food licence in Kalaburagi with Nexus Solutions. Licence-type assessment, Form A/B drafting, FoSCoS submission and follow-up for restaurants, cloud kitchens, manufacturers and traders.",
+  path: PATH,
+  keywords: [
+    "FSSAI registration Kalaburagi",
+    "food licence Gulbarga",
+    "FSSAI licence for restaurant Karnataka",
+    "cloud kitchen FSSAI Kalaburagi",
+    "FoSCoS application consultant",
+  ],
+});
 
 export default function FSSAIPage() {
   return (
     <div className="min-h-screen bg-white">
-      <ServiceHero 
+      <JsonLd
+        schemas={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "FSSAI Food Licence", path: PATH },
+          ]),
+          serviceSchema({
+            name: "FSSAI Food Licence Registration",
+            description:
+              "FSSAI food licence registration in Kalaburagi, Karnataka for food businesses: Basic, State and Central licence assessment, Form A/B drafting and FoSCoS portal submission.",
+            path: PATH,
+            serviceType: "Food business licence",
+          }),
+          faqSchema(FAQS),
+        ]}
+      />
+      <ServiceHero
         category="Licences"
         title="FSSAI Food License"
         description="Mandatory for all food businesses, restaurants, cloud kitchens, grocers, and food manufacturers. Ensure food safety compliance and build consumer trust with an FSSAI Certificate."
@@ -130,26 +179,7 @@ export default function FSSAIPage() {
 
             <section id="faq">
               <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Frequently Asked Questions</h2>
-              <ServiceFAQ 
-                faqs={[
-                  {
-                    q: "Is FSSAI mandatory for selling homemade food on Swiggy or Zomato?",
-                    a: "Yes, it is strictly mandatory. Food delivery aggregators will not onboard you unless you provide a valid FSSAI 14-digit registration number, even if you are operating from a home kitchen."
-                  },
-                  {
-                    q: "What is the validity of an FSSAI License?",
-                    a: "An FSSAI license can be issued for a period ranging from 1 year to a maximum of 5 years. You must renew it 30 days before its expiry."
-                  },
-                  {
-                    q: "What is the penalty for running a food business without an FSSAI license?",
-                    a: "Operating without an FSSAI license is an offense punishable by imprisonment of up to 6 months and a penalty of up to ₹5,00,000."
-                  },
-                  {
-                    q: "Do I need a separate FSSAI license for different locations?",
-                    a: "Yes. If your business operates in multiple locations, you must obtain a separate State/Basic license for each premises, and one Central License for the Head Office."
-                  }
-                ]}
-              />
+              <ServiceFAQ faqs={FAQS} />
             </section>
 
           </div>

@@ -5,17 +5,66 @@ import { DocumentChecklist } from "@/components/services/DocumentChecklist";
 import { ProcessTimeline } from "@/components/services/ProcessTimeline";
 import { FeeBreakdown } from "@/components/services/FeeBreakdown";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 import React from "react";
 
-export const metadata = {
-  title: "Monthly Accounting & Bookkeeping | Nexus Solutions",
-  description: "Professional accounting, bookkeeping, and payroll services for businesses in India. Outsource your accounting to Nexus Solutions.",
-};
+const PATH = "/services/accounting/monthly-bookkeeping";
+
+const FAQS = [
+  {
+    q: "Which accounting software do you work on?",
+    a: "We maintain books in Tally Prime, Zoho Books or QuickBooks — whichever you already use, or we set one up for you. You retain full ownership of and access to your data.",
+  },
+  {
+    q: "Do you also file our GST and TDS returns?",
+    a: "Yes. The monthly plan includes GST reconciliation and filing of monthly GSTR-1/GSTR-3B and quarterly TDS returns, plus payroll processing if you have employees.",
+  },
+  {
+    q: "Can you take over books that are behind by several months?",
+    a: "Yes. We do catch-up bookkeeping to bring prior periods up to date and reconciled before starting the regular monthly cycle. Catch-up work is quoted separately based on volume.",
+  },
+  {
+    q: "Is my financial data kept confidential?",
+    a: "Documents are exchanged through a secure cloud folder with restricted access, and every engagement is covered by a confidentiality undertaking.",
+  },
+];
+
+export const metadata = pageMetadata({
+  title: "Accounting & Bookkeeping Services in Kalaburagi",
+  description:
+    "Outsource monthly bookkeeping, bank reconciliation, payroll, and GST/TDS filing to Nexus Solutions in Kalaburagi. A dedicated accountant, monthly P&L and audit-ready financials in Tally, Zoho Books or QuickBooks from ₹3,999/month.",
+  path: PATH,
+  keywords: [
+    "accounting services Kalaburagi",
+    "bookkeeping services Gulbarga",
+    "outsourced accountant Karnataka",
+    "payroll services Kalaburagi",
+    "Tally accounting consultant Gulbarga",
+  ],
+});
 
 export default function AccountingPage() {
   return (
     <div className="min-h-screen bg-white">
-      <ServiceHero 
+      <JsonLd
+        schemas={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Monthly Accounting & Bookkeeping", path: PATH },
+          ]),
+          serviceSchema({
+            name: "Monthly Accounting & Bookkeeping",
+            description:
+              "Outsourced monthly accounting, bookkeeping, bank reconciliation, payroll and GST/TDS return filing for businesses in Kalaburagi, Karnataka.",
+            path: PATH,
+            serviceType: "Accounting service",
+          }),
+          faqSchema(FAQS),
+        ]}
+      />
+      <ServiceHero
         category="Accounting"
         title="Monthly Bookkeeping & Accounting"
         description="Focus on growing your business while our expert CAs and accountants manage your ledgers, payroll, and tax compliance using Tally or Zoho Books."
@@ -82,13 +131,18 @@ export default function AccountingPage() {
 
             <section id="pricing">
               <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Pricing Breakdown (Starting Base Plan)</h2>
-              <FeeBreakdown 
+              <FeeBreakdown
                 professionalFee={3999}
                 governmentFee={0}
                 gstAmount={720}
                 total={4719}
                 notes="Note: Pricing is Per Month. This base plan covers up to 100 transactions/month. Custom pricing applies for larger volumes or complex e-commerce integrations."
               />
+            </section>
+
+            <section id="faq">
+              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Frequently Asked Questions</h2>
+              <ServiceFAQ faqs={FAQS} />
             </section>
 
           </div>

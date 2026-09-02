@@ -5,17 +5,66 @@ import { DocumentChecklist } from "@/components/services/DocumentChecklist";
 import { ProcessTimeline } from "@/components/services/ProcessTimeline";
 import { FeeBreakdown } from "@/components/services/FeeBreakdown";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 import React from "react";
 
-export const metadata = {
-  title: "Udyam (MSME) Registration | Nexus Solutions",
-  description: "Get your MSME (Udyam) Registration. Unlock government subsidies, cheaper bank loans, and 50% discount on Trademark fees.",
-};
+const PATH = "/services/govt-registrations/udyam-msme";
+
+const FAQS = [
+  {
+    q: "Is there any government fee for Udyam registration?",
+    a: "No. The Udyam Registration portal does not charge any government fee. With Nexus Solutions you only pay a professional fee for correct NIC-code mapping and error-free filing.",
+  },
+  {
+    q: "Do I need a GST number for Udyam registration?",
+    a: "GST is not mandatory for enterprises that are not required to register under GST law. If your business is GST-registered, the GSTIN must be linked. We confirm the correct route for your case before filing.",
+  },
+  {
+    q: "What are the main benefits of an Udyam (MSME) certificate?",
+    a: "Priority-sector and collateral-free bank loans under CGTMSE, protection against delayed payments (interest on overdue buyer payments), a 50% concession on trademark and patent government fees, and eligibility for many state and central subsidy schemes.",
+  },
+  {
+    q: "How long does Udyam registration take?",
+    a: "Once we have your Aadhaar-linked mobile OTP and business details, the Udyam Registration Number (URN) and certificate are usually issued within 2–3 working days.",
+  },
+];
+
+export const metadata = pageMetadata({
+  title: "Udyam / MSME Registration in Kalaburagi",
+  description:
+    "Register your business as a Micro, Small or Medium Enterprise (Udyam / MSME) in Kalaburagi with Nexus Solutions. Correct NIC-code mapping, Aadhaar-based filing and same-week Udyam certificate to unlock CGTMSE loans, subsidies and trademark fee concessions.",
+  path: PATH,
+  keywords: [
+    "Udyam registration Kalaburagi",
+    "MSME registration Gulbarga",
+    "Udyog Aadhaar Karnataka",
+    "MSME certificate consultant Kalaburagi",
+    "small business registration Gulbarga",
+  ],
+});
 
 export default function MSMEPage() {
   return (
     <div className="min-h-screen bg-white">
-      <ServiceHero 
+      <JsonLd
+        schemas={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Udyam / MSME Registration", path: PATH },
+          ]),
+          serviceSchema({
+            name: "Udyam (MSME) Registration",
+            description:
+              "Udyam / MSME registration service in Kalaburagi, Karnataka: NIC-code mapping, Aadhaar-based application on the Udyam portal and issuance of the Udyam Registration Certificate.",
+            path: PATH,
+            serviceType: "MSME registration",
+          }),
+          faqSchema(FAQS),
+        ]}
+      />
+      <ServiceHero
         category="Government Registrations"
         title="Udyam (MSME) Registration"
         description="Unlock massive government benefits, collateral-free bank loans, and protection against delayed payments with an MSME Registration."
@@ -107,13 +156,18 @@ export default function MSMEPage() {
 
             <section id="pricing">
               <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Pricing Breakdown</h2>
-              <FeeBreakdown 
+              <FeeBreakdown
                 professionalFee={499}
                 governmentFee={0}
                 gstAmount={90}
                 total={589}
                 notes="Note: The Udyam registration portal does not charge any government fees. You are only paying for our professional filing services."
               />
+            </section>
+
+            <section id="faq">
+              <h2 className="text-3xl font-bold font-plus-jakarta text-[#0F172A] mb-6">Frequently Asked Questions</h2>
+              <ServiceFAQ faqs={FAQS} />
             </section>
 
           </div>

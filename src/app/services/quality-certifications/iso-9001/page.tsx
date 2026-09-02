@@ -5,17 +5,66 @@ import { DocumentChecklist } from "@/components/services/DocumentChecklist";
 import { ProcessTimeline } from "@/components/services/ProcessTimeline";
 import { FeeBreakdown } from "@/components/services/FeeBreakdown";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata, breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/seo";
 import React from "react";
 
-export const metadata = {
-  title: "ISO 9001:2015 Quality Certification | Nexus Solutions",
-  description: "Get ISO 9001 Certified in India. Enhance your brand value, build trust, and qualify for government tenders with Nexus Solutions.",
-};
+const PATH = "/services/quality-certifications/iso-9001";
+
+const FAQS = [
+  {
+    q: "What is the difference between IAF and Non-IAF ISO certification?",
+    a: "IAF (International Accreditation Forum) approved certificates are globally recognized and mandatory for government tenders. Non-IAF certificates are cheaper, issued quickly, and are generally only used for branding or marketing purposes.",
+  },
+  {
+    q: "What is the validity of the ISO 9001 certificate?",
+    a: "An ISO certificate is valid for 3 years. However, a mandatory surveillance audit must be conducted every year to maintain the certification's validity.",
+  },
+  {
+    q: "Can a completely new startup apply for ISO?",
+    a: "Yes, newly registered startups can apply, provided they have defined their operational processes and QMS documentation.",
+  },
+  {
+    q: "Is a physical office inspection required?",
+    a: "For Non-IAF certificates, an online/document audit is usually sufficient. For IAF certificates, a physical or detailed virtual audit by the certification body may be required depending on the industry risk.",
+  },
+];
+
+export const metadata = pageMetadata({
+  title: "ISO 9001:2015 Certification Consultants in Kalaburagi",
+  description:
+    "ISO 9001:2015 Quality Management System certification for businesses in Kalaburagi and Karnataka: gap analysis, QMS documentation, internal audit and IAF-approved certification audit so you can bid for government tenders and win B2B clients.",
+  path: PATH,
+  keywords: [
+    "ISO 9001 certification Kalaburagi",
+    "ISO certification consultant Gulbarga",
+    "ISO 9001:2015 Karnataka",
+    "ISO certification for tenders",
+    "QMS certification Kalaburagi",
+  ],
+});
 
 export default function ISO9001Page() {
   return (
     <div className="min-h-screen bg-white">
-      <ServiceHero 
+      <JsonLd
+        schemas={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "ISO 9001:2015 Certification", path: PATH },
+          ]),
+          serviceSchema({
+            name: "ISO 9001:2015 Certification",
+            description:
+              "ISO 9001:2015 Quality Management System certification consulting in Kalaburagi, Karnataka: gap analysis, QMS documentation, internal audit and certification-body audit.",
+            path: PATH,
+            serviceType: "ISO certification",
+          }),
+          faqSchema(FAQS),
+        ]}
+      />
+      <ServiceHero
         category="Quality Certifications"
         title="ISO 9001:2015 Certification"
         description="The world's most recognized Quality Management System (QMS) standard. Prove your commitment to quality, qualify for government tenders, and win global clients."
@@ -124,26 +173,7 @@ export default function ISO9001Page() {
 
             <section id="faq">
               <h2 className="text-3xl font-bold font-plus-jakarta text-text-primary mb-6">Frequently Asked Questions</h2>
-              <ServiceFAQ 
-                faqs={[
-                  {
-                    q: "What is the difference between IAF and Non-IAF ISO certification?",
-                    a: "IAF (International Accreditation Forum) approved certificates are globally recognized and mandatory for government tenders. Non-IAF certificates are cheaper, issued quickly, and are generally only used for branding or marketing purposes."
-                  },
-                  {
-                    q: "What is the validity of the ISO 9001 certificate?",
-                    a: "An ISO certificate is valid for 3 years. However, a mandatory surveillance audit must be conducted every year to maintain the certification's validity."
-                  },
-                  {
-                    q: "Can a completely new startup apply for ISO?",
-                    a: "Yes, newly registered startups can apply, provided they have defined their operational processes and QMS documentation."
-                  },
-                  {
-                    q: "Is a physical office inspection required?",
-                    a: "For Non-IAF certificates, an online/document audit is usually sufficient. For IAF certificates, a physical or detailed virtual audit by the certification body may be required depending on the industry risk."
-                  }
-                ]}
-              />
+              <ServiceFAQ faqs={FAQS} />
             </section>
 
           </div>
