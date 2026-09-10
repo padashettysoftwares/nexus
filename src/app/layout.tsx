@@ -79,6 +79,14 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className={cn(inter.variable, plusJakartaSans.variable, "font-sans", geist.variable)}>
       <body className="antialiased min-h-screen flex flex-col selection:bg-primary selection:text-white bg-background text-text-primary">
+        {/* Scroll-reveal hides sections until JavaScript reveals them. Without
+            JavaScript there is nothing to run the observer, so undo the hiding
+            outright rather than leaving the page blank. */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<style>.reveal{opacity:1 !important;transform:none !important}</style>`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={jsonLd(organizationSchema(), websiteSchema())}

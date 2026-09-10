@@ -1,10 +1,11 @@
-import { SmeHeroSection } from "@/components/sections/sme-theme/sme-hero-section";
-import { SmeSectorInfoSection } from "@/components/sections/sme-theme/sme-sector-info-section";
-import { SmeCompaniesAvailedSection } from "@/components/sections/sme-theme/sme-companies-availed-section";
-import { SmeChallengesServicesSection } from "@/components/sections/sme-theme/sme-challenges-services-section";
-import { SmeIndustrySolutionsSection } from "@/components/sections/sme-theme/sme-industry-solutions-section";
+import { Hero } from "@/components/home/hero";
+import { ServicesIndex } from "@/components/home/services-index";
+import { WhyNexus } from "@/components/home/why-nexus";
+import { Process } from "@/components/home/process";
+import { Industries } from "@/components/home/industries";
+import { AboutIntro } from "@/components/home/about-intro";
+import { ClosingCta } from "@/components/home/closing-cta";
 import { SmeServiceAreasSection } from "@/components/sections/sme-theme/sme-service-areas-section";
-import { StickyBottomBar } from "@/components/sections/sme-theme/sticky-bottom-bar";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { pageMetadata, breadcrumbSchema } from "@/lib/seo";
 
@@ -28,13 +29,15 @@ export default function Home() {
   return (
     <>
       <JsonLd schemas={[breadcrumbSchema([{ name: "Home", path: "/" }])]} />
-      <SmeHeroSection />
-      <SmeSectorInfoSection />
-      <SmeCompaniesAvailedSection />
-      <SmeChallengesServicesSection />
-      <SmeIndustrySolutionsSection />
+      <Hero />
+      <ServicesIndex />
+      <WhyNexus />
+      <Process />
+      <Industries />
+      <AboutIntro />
+      <ClosingCta />
+      {/* Screen-reader-only service-area list retained from the SEO pass. */}
       <SmeServiceAreasSection />
-      <StickyBottomBar />
     </>
   );
 }

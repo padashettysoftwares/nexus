@@ -3,157 +3,349 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, Menu, X, ChevronDown, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { SERVICE_GROUPS } from "@/lib/site-data";
 import { BookConsultationModal } from "@/components/ui/book-consultation-modal";
 
+const NAV_LINKS = [
+  { name: "Industries", href: "/#industries" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+];
+
+/**
+ * Sticky, in-flow navigation.
+ *
+ * Deliberately not a floating pill: sitting in the document means page content
+ * is never hidden underneath it, and a single hairline is enough separation on
+ * a white page. The services mega-menu mirrors the five practice areas so the
+ * navigation and the homepage index never drift apart.
+ */
 export function Navbar() {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
-  const [searchOpen, setSearchOpen] = React.useState(false);
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const pathname = usePathname();
+  const [servicesOpen, setServicesOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [openGroup, setOpenGroup] = React.useState<string | null>(null);
   const [modalOpen, setModalOpen] = React.useState(false);
-  const searchInputRef = React.useRef<HTMLInputElement>(null);
+  const navRef = React.useRef<HTMLElement | null>(null);
+  const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleMenuHover = (menu: string | null) => {
-    setActiveMenu(menu);
+  // Any navigation closes whatever is open.
+  React.useEffect(() => {
+    setServicesOpen(false);
+    setMobileOpen(false);
+    setOpenGroup(null);
+  }, [pathname]);
+
+  // Escape closes; clicking outside the header closes the mega-menu.
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setServicesOpen(false);
+        setMobileOpen(false);
+      }
+    };
+    const onPointerDown = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onPointerDown);
+    };
+  }, []);
+
+  // The mobile panel scrolls itself; lock the page behind it.
+  React.useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  React.useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  /** Small grace period so the pointer can travel from trigger to panel. */
+  const openServices = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setServicesOpen(true);
+  };
+  const scheduleCloseServices = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setServicesOpen(false), 140);
   };
 
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-    if (!searchOpen) {
-      setTimeout(() => searchInputRef.current?.focus(), 100);
-    } else {
-      setSearchQuery("");
-    }
-  };
+  const isActive = (href: string) =>
+    href.startsWith("/#") ? false : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 p-4 md:p-6 transition-all duration-300 flex justify-center">
-      <header className="relative w-full max-w-7xl border border-white/20 bg-white/70 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl md:rounded-full transition-all hover:bg-white/90 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-        <div className="px-5 md:px-8 flex h-20 items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-             <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden border border-blue-100 shadow-sm shrink-0">
-               <Image src="/Nexus-logo.jpeg" alt="Nexus Solutions Icon" fill className="object-cover" />
-             </div>
-             <div className="relative w-36 h-10 md:w-44 md:h-12 overflow-hidden hidden sm:block">
-               <Image src="/name.png" alt="Nexus Solutions" fill className="object-contain object-left" />
-             </div>
+    <header
+      ref={navRef}
+      className="sticky top-0 z-50 border-b border-rule bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85"
+    >
+      <div className="mx-auto w-full max-w-shell px-5 sm:px-6 lg:px-10">
+        <div className="flex h-16 items-center justify-between gap-6 lg:h-[4.5rem]">
+          <Link
+            href="/"
+            className="-my-1 flex shrink-0 items-center gap-2.5 rounded-sm py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            aria-label="Nexus Solutions — home"
+          >
+            <span className="relative h-9 w-9 overflow-hidden rounded-[5px] border border-rule">
+              <Image src="/Nexus-logo.jpeg" alt="" fill sizes="36px" className="object-cover" />
+            </span>
+            <span className="font-display text-[0.9375rem] font-semibold tracking-[-0.01em] text-ink-900">
+              Nexus Solutions
+            </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8 h-full">
-            {/* Services Dropdown */}
-            <div 
-              className="relative h-full flex items-center"
-              onMouseEnter={() => handleMenuHover('services')}
-              onMouseLeave={() => handleMenuHover(null)}
+          {/* Desktop navigation */}
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+            <div
+              className="relative"
+              onMouseEnter={openServices}
+              onMouseLeave={scheduleCloseServices}
             >
-              <button className="flex items-center gap-1.5 text-base font-bold text-gray-800 hover:text-blue-700 transition-colors py-2 group">
-                Services <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeMenu === 'services' ? "rotate-180 text-blue-700" : "text-gray-400 group-hover:text-blue-700"}`} />
+              <button
+                type="button"
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+                onClick={() => setServicesOpen((v) => !v)}
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-[0.9375rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                  servicesOpen || pathname.startsWith("/services")
+                    ? "text-ink-900"
+                    : "text-ink-600 hover:text-ink-900"
+                )}
+              >
+                Services
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  className={cn(
+                    "h-3 w-3 text-ink-400 transition-transform duration-200",
+                    servicesOpen && "rotate-180"
+                  )}
+                >
+                  <path
+                    d="M3 4.5 6 7.5 9 4.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </button>
-              {activeMenu === 'services' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[600px] animate-in fade-in slide-in-from-top-2">
-                  <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-2 p-6 gap-6 relative">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-[#dc2626]"></div>
-                    <div>
-                      <h5 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-2 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500"></span> Business Setup</h5>
-                      <Link href="/services/business-registration/private-limited" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Private Limited Registration</Link>
-                      <Link href="/services/govt-registrations/udyam-msme" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Udyam / MSME Registration</Link>
-                      <Link href="/services/trademark-and-ip/trademark-registration" className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg font-medium transition-colors">Trademark Registration</Link>
-                    </div>
-                    <div>
-                      <h5 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-2 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#dc2626]"></span> Tax &amp; Compliance</h5>
-                      <Link href="/services/gst-and-tax/gst-registration" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">GST Registration &amp; Filing</Link>
-                      <Link href="/services/licences/fssai" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">FSSAI Food Licence</Link>
-                      <Link href="/services/quality-certifications/iso-9001" className="block px-3 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-[#dc2626] rounded-lg font-medium transition-colors">ISO 9001 Certification</Link>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
-            {/* Industries Dropdown */}
-            <div 
-              className="relative h-full flex items-center"
-              onMouseEnter={() => handleMenuHover('industries')}
-              onMouseLeave={() => handleMenuHover(null)}
-            >
-              <button className="flex items-center gap-1.5 text-base font-bold text-gray-800 hover:text-blue-700 transition-colors py-2 group">
-                Industries <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeMenu === 'industries' ? "rotate-180 text-blue-700" : "text-gray-400 group-hover:text-blue-700"}`} />
-              </button>
-              {activeMenu === 'industries' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[500px] animate-in fade-in slide-in-from-top-2">
-                  <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-2 p-6 gap-2">
-                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">🍽️ Food & Beverage</Link>
-                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">👕 Textiles & Apparel</Link>
-                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">💊 Pharmaceuticals</Link>
-                    <Link href="/#industries" className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-700 rounded-lg font-medium transition-colors flex items-center gap-2">🚗 Automotive</Link>
-                    <Link href="/#industries" className="col-span-2 mt-4 pt-4 border-t border-gray-100 text-sm font-bold text-blue-600 hover:text-blue-800 text-center flex items-center justify-center gap-1">View All Industries <ArrowRight className="w-4 h-4" /></Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <Link href="/pricing" className="text-base font-bold text-gray-800 hover:text-blue-700 transition-colors">
-              Pricing
-            </Link>
-
-            <Link href="/contact" className="text-base font-bold text-gray-800 hover:text-blue-700 transition-colors">
-              Contact
-            </Link>
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "rounded-md px-3 py-2 text-[0.9375rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                  isActive(link.href) ? "text-ink-900" : "text-ink-600 hover:text-ink-900"
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-4">
-            <div className={`flex items-center transition-all duration-300 ease-out overflow-hidden ${searchOpen ? 'w-64 bg-gray-50 border border-gray-200 rounded-full' : 'w-10 bg-transparent border-transparent'}`}>
-              <button onClick={toggleSearch} className={`w-10 h-10 flex items-center justify-center shrink-0 rounded-full transition-colors ${searchOpen ? 'text-gray-500' : 'text-gray-600 hover:bg-gray-100'}`}>
-                <Search className="w-5 h-5" />
-              </button>
-              <input 
-                ref={searchInputRef}
-                type="text" 
-                placeholder="Search services..." 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className={`w-full bg-transparent border-none focus:outline-none text-sm text-gray-700 font-medium placeholder:text-gray-400 transition-all ${searchOpen ? 'opacity-100 px-2' : 'opacity-0 w-0'}`}
-                style={{ visibility: searchOpen ? 'visible' : 'hidden' }}
-              />
-            </div>
-            <Button 
-              onClick={() => setModalOpen(true)}
-              className="rounded-full px-7 h-12 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-bold shadow-lg shadow-red-500/30 transition-all hover:shadow-red-500/50 hover:-translate-y-0.5 group flex items-center gap-2"
+          <div className="hidden items-center gap-5 lg:flex">
+            <a
+              href="tel:+919483486111"
+              className="text-[0.9375rem] font-medium text-ink-600 transition-colors hover:text-ink-900"
             >
-              Book Appointment
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+              +91 94834 86111
+            </a>
+            <button
+              type="button"
+              onClick={() => setModalOpen(true)}
+              className="inline-flex h-10 items-center justify-center rounded-md bg-accent px-4 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            >
+              Book a consultation
+            </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button className="lg:hidden p-2 text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-full transition-colors" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {/* Mobile trigger */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className="-mr-2.5 inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-700 transition-colors hover:bg-ink-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent lg:hidden"
+          >
+            <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+              {mobileOpen ? (
+                <path
+                  d="m6 6 12 12M18 6 6 18"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                />
+              ) : (
+                <path
+                  d="M3.5 7h17M3.5 12h17M3.5 17h17"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
           </button>
         </div>
+      </div>
 
-        {/* Mobile Dropdown */}
-        {isOpen && (
-          <div className="absolute top-full left-0 w-full mt-2 bg-white/95 backdrop-blur-2xl border border-gray-100 rounded-2xl shadow-2xl overflow-hidden lg:hidden flex flex-col p-4 animate-in fade-in slide-in-from-top-4">
-            <Link href="/services" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Services</Link>
-            <Link href="/#industries" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Industries</Link>
-            <Link href="/pricing" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Pricing</Link>
-            <Link href="/contact" className="px-4 py-3 text-base font-bold text-gray-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Contact</Link>
-            <div className="pt-4 mt-2 border-t border-gray-100 flex justify-center">
-              <Button 
-                onClick={() => { setIsOpen(false); setModalOpen(true); }}
-                className="w-full rounded-full h-12 bg-[#dc2626] hover:bg-[#b91c1c] text-white font-bold shadow-lg shadow-red-500/30"
+      {/* Desktop mega-menu */}
+      {servicesOpen ? (
+        <div
+          className="absolute inset-x-0 top-full hidden border-b border-rule bg-white shadow-menu lg:block"
+          onMouseEnter={openServices}
+          onMouseLeave={scheduleCloseServices}
+        >
+          <div className="mx-auto w-full max-w-shell px-5 sm:px-6 lg:px-10">
+            <div className="grid grid-cols-5 gap-px bg-rule py-0">
+              {SERVICE_GROUPS.map((group) => (
+                <div key={group.id} className="bg-white px-5 py-8 first:pl-0 last:pr-0">
+                  <p className="text-[11px] font-semibold uppercase tracking-eyebrow text-ink-400">
+                    {group.name}
+                  </p>
+                  <ul className="mt-4 space-y-1">
+                    {group.services.map((service) => (
+                      <li key={service.href}>
+                        <Link
+                          href={service.href}
+                          className="block rounded-md px-2 py-1.5 text-[0.875rem] leading-snug text-ink-700 transition-colors hover:bg-ink-50 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        >
+                          {service.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-between border-t border-rule py-4">
+              <p className="text-sm text-ink-500">
+                Not sure which applies to you? We will tell you in one call.
+              </p>
+              <Link
+                href="/services"
+                className="text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
               >
-                Book Appointment
-              </Button>
+                View all services →
+              </Link>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      ) : null}
+
+      {/* Mobile panel */}
+      {mobileOpen ? (
+        <div className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto overscroll-contain border-t border-rule bg-white lg:hidden">
+          <div className="mx-auto w-full max-w-shell px-5 pb-10 pt-2 sm:px-6">
+            <div className="divide-y divide-rule">
+              {SERVICE_GROUPS.map((group) => {
+                const open = openGroup === group.id;
+                return (
+                  <div key={group.id} className="py-1">
+                    <button
+                      type="button"
+                      onClick={() => setOpenGroup(open ? null : group.id)}
+                      aria-expanded={open}
+                      className="flex w-full items-center justify-between gap-4 py-3.5 text-left text-[0.9375rem] font-medium text-ink-900"
+                    >
+                      {group.name}
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        className={cn(
+                          "h-3.5 w-3.5 shrink-0 text-ink-400 transition-transform duration-200",
+                          open && "rotate-180"
+                        )}
+                      >
+                        <path
+                          d="M3 4.5 6 7.5 9 4.5"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    {open ? (
+                      <ul className="animate-fade-in pb-3 pl-1">
+                        {group.services.map((service) => (
+                          <li key={service.href}>
+                            <Link
+                              href={service.href}
+                              className="block py-2.5 text-[0.9375rem] text-ink-600"
+                            >
+                              {service.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                );
+              })}
+
+              <div className="py-1">
+                <Link
+                  href="/services"
+                  className="block py-3.5 text-[0.9375rem] font-medium text-ink-900"
+                >
+                  All services
+                </Link>
+              </div>
+
+              {NAV_LINKS.map((link) => (
+                <div key={link.href} className="py-1">
+                  <Link
+                    href={link.href}
+                    className="block py-3.5 text-[0.9375rem] font-medium text-ink-900"
+                  >
+                    {link.name}
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 space-y-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setModalOpen(true);
+                }}
+                className="inline-flex h-12 w-full items-center justify-center rounded-md bg-accent px-5 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-accent-hover"
+              >
+                Book a consultation
+              </button>
+              <a
+                href="tel:+919483486111"
+                className="inline-flex h-12 w-full items-center justify-center rounded-md border border-ink-200 px-5 text-[0.9375rem] font-semibold text-ink-800 transition-colors hover:bg-ink-50"
+              >
+                Call +91 94834 86111
+              </a>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <BookConsultationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-    </div>
+    </header>
   );
 }

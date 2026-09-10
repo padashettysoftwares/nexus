@@ -9,13 +9,20 @@ interface DocCategory {
 }
 
 interface DocumentChecklistProps {
-  categories: DocCategory[];
+  categories?: DocCategory[];
+  /** Flat variant used by service pages with a single, uncategorised list. */
+  documents?: string[];
 }
 
-export function DocumentChecklist({ categories }: DocumentChecklistProps) {
+export function DocumentChecklist({ categories, documents }: DocumentChecklistProps) {
+  // Accept either the grouped shape or a flat list; a flat list is presented as
+  // one category so both variants render through the same markup.
+  const groups: DocCategory[] =
+    categories ?? (documents?.length ? [{ title: "Required Documents", docs: documents }] : []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {categories.map((category, i) => (
+      {groups.map((category, i) => (
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

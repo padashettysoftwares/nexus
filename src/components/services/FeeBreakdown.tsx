@@ -4,14 +4,21 @@ import { motion } from "framer-motion";
 import { IndianRupee } from "lucide-react";
 
 interface FeeBreakdownProps {
-  professionalFee: number;
-  governmentFee: number;
-  gstAmount: number;
-  total: number;
+  professionalFee?: number;
+  governmentFee?: number;
+  gstAmount?: number;
+  /** Some pages pass a label such as "Custom" rather than a computed figure. */
+  total?: number | string;
+  items?: { name: string; amount: number | string }[];
   notes?: string;
+  /** Alias for `notes` used by the newer service pages. */
+  note?: string;
 }
 
-export function FeeBreakdown({ professionalFee, governmentFee, gstAmount, total, notes }: FeeBreakdownProps) {
+export function FeeBreakdown({ notes, note }: FeeBreakdownProps) {
+  // The panel intentionally shows a quote prompt rather than a fee table, so the
+  // figures are accepted for API compatibility but not rendered.
+  const footnote = notes ?? note;
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -33,9 +40,9 @@ export function FeeBreakdown({ professionalFee, governmentFee, gstAmount, total,
         </a>
       </div>
       
-      {notes && (
+      {footnote && (
         <div className="bg-surface-alt p-4 text-sm text-text-secondary text-center border-t border-border">
-          {notes}
+          {footnote}
         </div>
       )}
     </motion.div>

@@ -7,13 +7,28 @@ import React from "react";
 
 interface ServiceHeroProps {
   title: string;
-  category: string;
   description: string;
-  icon: React.ReactNode;
-  benefits: string[];
+  /** Breadcrumb leaf. Some service pages pass this as `badge` instead. */
+  category?: string;
+  badge?: string;
+  icon?: React.ReactNode;
+  benefits?: string[];
 }
 
-export function ServiceHero({ title, category, description, icon, benefits }: ServiceHeroProps) {
+export function ServiceHero({
+  title,
+  category,
+  badge,
+  description,
+  icon,
+  benefits,
+}: ServiceHeroProps) {
+  // Several service pages were authored against a `badge` / no-icon variant of
+  // this component. Tolerating both shapes keeps every page rendering without
+  // changing the output for the pages that pass the full set.
+  const breadcrumbLabel = category ?? badge;
+  const benefitList = benefits ?? [];
+
   return (
     <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl relative z-10">
@@ -23,8 +38,12 @@ export function ServiceHero({ title, category, description, icon, benefits }: Se
           <Link href="/" className="hover:text-white transition-colors">Home</Link>
           <ChevronRight className="w-3 h-3" />
           <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-white">{category}</span>
+          {breadcrumbLabel ? (
+            <>
+              <ChevronRight className="w-3 h-3" />
+              <span className="text-white">{breadcrumbLabel}</span>
+            </>
+          ) : null}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -35,9 +54,11 @@ export function ServiceHero({ title, category, description, icon, benefits }: Se
             transition={{ duration: 0.6 }}
             className="lg:col-span-8 xl:col-span-7"
           >
-            <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 border border-white/20 text-white">
-              {icon}
-            </div>
+            {icon ? (
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 border border-white/20 text-white">
+                {icon}
+              </div>
+            ) : null}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-plus-jakarta text-white mb-6 leading-[1.1]">
               {title}
             </h1>
@@ -46,7 +67,7 @@ export function ServiceHero({ title, category, description, icon, benefits }: Se
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {benefits.map((benefit, i) => (
+              {benefitList.map((benefit, i) => (
                 <motion.div 
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}

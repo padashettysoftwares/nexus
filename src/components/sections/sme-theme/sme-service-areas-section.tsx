@@ -4,32 +4,32 @@ const states = [
   {
     name: "Karnataka",
     cities: [
-      "Bengaluru", "Mysuru", "Hubballi", "Dharwad", "Mangaluru", 
-      "Belagavi", "Kalaburagi", "Ballari", "Davanagere", "Shivamogga", 
+      "Bengaluru", "Mysuru", "Hubballi", "Dharwad", "Mangaluru",
+      "Belagavi", "Kalaburagi", "Ballari", "Davanagere", "Shivamogga",
       "Tumakuru", "Raichur", "Bidar", "Hosapete", "Hassan"
     ]
   },
   {
     name: "Maharashtra",
     cities: [
-      "Mumbai", "Pune", "Nagpur", "Nashik", "Thane", 
-      "Chhatrapati Sambhaji Nagar", "Solapur", "Kolhapur", "Amravati", "Navi Mumbai", 
+      "Mumbai", "Pune", "Nagpur", "Nashik", "Thane",
+      "Chhatrapati Sambhaji Nagar", "Solapur", "Kolhapur", "Amravati", "Navi Mumbai",
       "Kalyan-Dombivli", "Vasai-Virar", "Mira-Bhayandar", "Bhiwandi", "Ulhasnagar"
     ]
   },
   {
     name: "Telangana",
     cities: [
-      "Hyderabad", "Secunderabad", "Warangal", "Nizamabad", "Karimnagar", 
-      "Khammam", "Ramagundam", "Mahbubnagar", "Nalgonda", "Siddipet", 
+      "Hyderabad", "Secunderabad", "Warangal", "Nizamabad", "Karimnagar",
+      "Khammam", "Ramagundam", "Mahbubnagar", "Nalgonda", "Siddipet",
       "Sangareddy", "Medchal", "Malkajgiri", "Quthbullapur", "Kukatpally"
     ]
   },
   {
     name: "Andhra Pradesh",
     cities: [
-      "Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", 
-      "Kakinada", "Rajahmundry", "Tirupati", "Kadapa", "Anantapur", 
+      "Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool",
+      "Kakinada", "Rajahmundry", "Tirupati", "Kadapa", "Anantapur",
       "Anakapalle", "Bheemunipatnam", "Vizianagaram", "Bobbili", "Srikakulam"
     ]
   }
