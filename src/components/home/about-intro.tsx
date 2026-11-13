@@ -5,7 +5,7 @@ import { Reveal } from "./reveal";
 
 /**
  * Homepage introduction to the firm. Kept factual and short — the full story
- * and the leadership sit on /about, which this links to.
+ * sits on /about, which this links to.
  */
 export function AboutIntro() {
   const facts = [

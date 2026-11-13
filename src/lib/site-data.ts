@@ -206,33 +206,6 @@ export const INDUSTRIES = [
   { name: "Retail & Trade", focus: "GST, shop establishment, trade licence" },
 ];
 
-/** Company leadership. */
-export const DIRECTORS: {
-  name: string;
-  role: string;
-  image: string | null;
-  initials: string;
-}[] = [
-  {
-    name: "Abhijeet Padashetty",
-    role: "Managing Director",
-    image: "/abhijeet.jpeg",
-    initials: "AP",
-  },
-  {
-    name: "Omkar Padashetty",
-    role: "Director",
-    image: "/omkar.png",
-    initials: "OP",
-  },
-  {
-    name: "Ishaan Padashetty",
-    role: "Director",
-    image: null,
-    initials: "IP",
-  },
-];
-
 /**
  * Social profiles. The real URLs have not been supplied yet — these are
  * deliberate placeholders so the footer layout is final. Replace each `href`

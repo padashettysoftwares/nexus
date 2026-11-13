@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ActionLink, Eyebrow, Section, Shell } from "@/components/home/primitives";
 import { ConsultationCta } from "@/components/home/consultation-cta";
-import { Leadership } from "@/components/home/leadership";
 import { Process } from "@/components/home/process";
 import { ClosingCta } from "@/components/home/closing-cta";
 import { Reveal } from "@/components/home/reveal";
@@ -14,12 +13,11 @@ const PATH = "/about";
 export const metadata = pageMetadata({
   title: "About Nexus Solutions — Business Consultants in Kalaburagi",
   description:
-    "Nexus Solutions is an MSME-registered, ISO 9001:2015 certified business consulting firm on MG Road, Kalaburagi (Gulbarga), Karnataka. Meet the directors and see how we work with startups and SMEs across four states.",
+    "Nexus Solutions is an MSME-registered, ISO 9001:2015 certified business consulting firm on MG Road, Kalaburagi (Gulbarga), Karnataka. See how we work with startups and SMEs across four states.",
   path: PATH,
   keywords: [
     "about Nexus Solutions",
     "business consultants Kalaburagi",
-    "Nexus Solutions directors",
     "consulting firm Gulbarga",
   ],
 });
@@ -147,8 +145,6 @@ export default function AboutPage() {
           </div>
         </Shell>
       </Section>
-
-      <Leadership />
 
       <Process />
 
